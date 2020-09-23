@@ -36,17 +36,23 @@ export default function BasicTable() {
                     <TableRow>
                         <TableCell align="center">Номер транспортного засобу</TableCell>
                         <TableCell align="center">Користувач</TableCell>
-                        {/* <TableCell align="center">Штрафи</TableCell>
-                        <TableCell align="center">Оплата додатку</TableCell> */}
+
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow key={row.vehicleNumber}>
-                            <TableCell component="th" scope="row" align="center"><a href="#">{row.vehicleNumber}</a></TableCell>
-                            <TableCell align="center">{row.userName}</TableCell>
-                            {/* <TableCell align="center">{row.fines}</TableCell>
-                            <TableCell align="center">{row.appPayment}</TableCell> */}
+                            <TableCell
+                                component="th"
+                                scope="row"
+                                align="center">
+                                <a href="#">
+                                    {row.vehicleNumber}
+                                </a>
+                            </TableCell>
+                            <TableCell align="center">
+                                {row.userName}
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
