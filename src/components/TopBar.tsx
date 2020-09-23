@@ -76,7 +76,7 @@ export default function TopBar() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Адмін-панель
+                        Панель адміністратора
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
