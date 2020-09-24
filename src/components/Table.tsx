@@ -8,6 +8,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
+
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
@@ -19,11 +26,11 @@ function createData(vehicleNumber: string, userName: string, fines: number, appP
 }
 
 const rows = [
-    createData('АА 0000 КК', 'Петренюк Семен Александрович', 6, 'Так'),
-    createData('АА 0000 КК', 'Петренюк Семен Александрович', 6, 'Так'),
-    createData('АА 0000 КК', 'Петренюк Семен Александрович', 6, 'Так'),
-    createData('АА 0000 КК', 'Петренюк Семен Александрович', 6, 'Так'),
-    createData('АА 0000 КК', 'Петренюк Семен Александрович', 6, 'Так')
+    createData('123456', 'Петренюк Семен Александрович', 6, 'Так'),
+    createData('123456', 'Петренюк Семен Александрович', 6, 'Так'),
+    createData('123456', 'Петренюк Семен Александрович', 6, 'Так'),
+    createData('123456', 'Петренюк Семен Александрович', 6, 'Так'),
+    createData('123456', 'Петренюк Семен Александрович', 6, 'Так')
 ];
 
 export default function BasicTable() {
@@ -39,23 +46,27 @@ export default function BasicTable() {
 
                     </TableRow>
                 </TableHead>
-                <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.vehicleNumber}>
-                            <TableCell
-                                component="th"
-                                scope="row"
-                                align="center">
-                                <a href="#">
-                                    {row.vehicleNumber}
-                                </a>
-                            </TableCell>
-                            <TableCell align="center">
-                                {row.userName}
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
+
+                <Router>
+                    <TableBody>
+                        {rows.map((row) => (
+                            <TableRow key={row.vehicleNumber}>
+                                <TableCell
+                                    component="th"
+                                    scope="row"
+                                    align="center">
+                                    <Link to={row.vehicleNumber}>
+                                        {row.vehicleNumber}
+                                    </Link>
+                                </TableCell>
+                                <TableCell align="center">
+                                    {row.userName}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Router>
+
             </Table>
         </TableContainer>
     );
