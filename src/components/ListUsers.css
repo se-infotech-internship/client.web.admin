@@ -1,0 +1,10 @@
+.side-bar {
+    border: 2px solid grey;
+    width: 360px;
+    height: 100vh;
+}
+
+.main-block {
+    background-color: lightblue;
+    width: 100%;
+}
