@@ -6,6 +6,8 @@ import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import Avatar from "@material-ui/core/Avatar";
+
 
 import UserInfo from './UserInfo';
 
@@ -20,18 +22,23 @@ const useStyles = makeStyles((theme: Theme) =>
             backgroundColor: theme.palette.background.paper,
             borderRight: '3px solid grey'
         },
+        large: {
+            width: theme.spacing(37),
+            height: theme.spacing(37),
+            margin: '50px auto'
+        }
     }),
 );
 
 
 const fakeUsers = [
-    { id: '123', name: 'Louis N. Thomas' },
-    { id: '345', name: 'Martin L. Maynes' }
+    { id: '123', name: 'Louis N. Thomas', mail: 'thomas@gmail.com', phone: '+380934562312', vehNum: 'AA 94534 KK', status: true, photo: 'https://bold.textcontrol.com/images/authors/Bjoern%20Meyer.jpg' },
+    { id: '345', name: 'Martina L. Maynes', mail: 'martin@gmail.com', phone: '+380354562185', vehNum: 'HA 18426 TH', status: false, photo: 'https://lh3.googleusercontent.com/proxy/OGJ3r8GRgowCqq5-TIpTnpanmK_UG7HwBbBtfP6wq2AgrOt0u4ixLm2duxez0UX3ed5HUdw3NvtDBekMyfPquCAkcU9cY7fihS7t7wgpWj3BJEMannTgs6RCp4WUyQEdOVcefvx0K-RpEKX4bxc7OTdI5ePRbzhsQtTXWj8' }
 ]
 
 
 export default function ListUsers() {
-    const [user, setUser] = React.useState({ id: '', name: '' });
+    const [user, setUser] = React.useState({ id: '', name: '', mail: '', phone: '', vehNum: '', status: true, photo: '' });
 
     const classes = useStyles();
 
@@ -45,7 +52,7 @@ export default function ListUsers() {
                         {fakeUsers.map(item => (
                             <ListItem button key={item.id} >
                                 <Link to={'/' + item.id} style={{ textDecoration: 'none' }} >
-                                    <ListItemText primary={item.name} onClick={() => setUser({ id: item.id, name: item.name })} />
+                                    <ListItemText primary={item.name} onClick={() => setUser({ id: item.id, name: item.name, mail: item.mail, phone: item.phone, vehNum: item.vehNum, status: item.status, photo: item.photo })} />
                                 </Link>
                             </ListItem>
                         ))}
@@ -58,15 +65,60 @@ export default function ListUsers() {
                             {/* <UserInfo /> */}
                             <div className="top-block">
                                 <div className="top-block-left">
-                                    BLOCK LEFT
-                                    
+                                    <Avatar
+                                        alt="avatar user"
+                                        src={user.photo}
+                                        className={classes.large}
+                                    />
                                 </div>
                                 <div className="top-block-right">
-                                    BLOCK RIGHT
+                                    <button>block / unblock user</button>
+                                    <p>name: {user.name}</p>
+                                    <p>email: {user.mail}</p>
+                                    <p>phone: {user.phone}</p>
+                                    <p>vehicle number: {user.vehNum}</p>
+                                    <p>staus: {user.status ? 'Active' : 'Block'}</p>
+                                    <form>
+                                        <textarea id="story" name="story" rows={10} cols={63}>
+                                            Send message...
+                                        </textarea>
+                                        <div>
+                                            <input type="submit" value="Send" />
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div className="bottom-block">
-                                bottom block
+                                <table style={{ width: '98%', margin: '30px auto' }}>
+                                    <thead>
+                                        <tr>
+                                            <th>Header content </th>
+                                            <th>Header content </th>
+                                            <th>Header content </th>
+                                            <th>Header content </th>
+                                            <th>Header content </th>
+                                            <th>Header content </th>
+                                            <th>Header content </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style={{ height: '30vh' }}>
+                                            <td>Body content 1</td>
+                                            <td>Body content 2</td>
+                                            <td>Body content 2</td>
+                                            <td>Body content 2</td>
+                                            <td>Body content 2</td>
+                                            <td>Body content 2</td>
+                                            <td>Body content 2</td>
+                                        </tr>
+                                    </tbody>
+                                    {/* <tfoot>
+                                        <tr>
+                                            <td>Footer content 1</td>
+                                            <td>Footer content 2</td>
+                                        </tr>
+                                    </tfoot> */}
+                                </table>
                             </div>
                         </Route>
                     </Switch>

@@ -7,23 +7,44 @@
 
 
 .top-block {
-    border: 1px solid green;
-    height: 40vh;
+    /* border: 1px solid green; */
+    /* height: 40vh; */
     display: flex;
 }
 
 .top-block-left {
-    border: 1px solid saddlebrown;
+    /* border: 1px solid saddlebrown; */
     width:30%;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: ghostwhite;
 }
 
 .top-block-right {
-    border: 1px solid slategray;
+    /* border: 1px solid slategray; */
     width: 70%;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: ghostwhite;
 }
 
 
 .bottom-block {
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
     height: 40vh;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: ghostwhite;
+}
+
+table,
+td {
+    border: 1px solid #333;
+}
+
+thead,
+tfoot {
+    background-color: #333;
+    color: #fff;
 }
