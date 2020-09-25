@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme: Theme) =>
         large: {
             width: theme.spacing(37),
             height: theme.spacing(37),
-            margin: '50px auto'
+            margin: '50px auto',
+            objectFit: 'fill'
         }
     }),
 );
@@ -42,15 +43,13 @@ export default function ListUsers() {
 
     const classes = useStyles();
 
-
-
     return (
         <Router>
             <div style={{ display: "flex" }}>
                 <div className={classes.root}>
                     <List>
                         {fakeUsers.map(item => (
-                            <ListItem button key={item.id} >
+                            <ListItem button key={item.id} divider={true} >
                                 <Link to={'/' + item.id} style={{ textDecoration: 'none' }} >
                                     <ListItemText primary={item.name} onClick={() => setUser({ id: item.id, name: item.name, mail: item.mail, phone: item.phone, vehNum: item.vehNum, status: item.status, photo: item.photo })} />
                                 </Link>
@@ -69,7 +68,9 @@ export default function ListUsers() {
                                         alt="avatar user"
                                         src={user.photo}
                                         className={classes.large}
+                                        variant='rounded'
                                     />
+                                    <h2 style={{ textAlign: 'center' }}>{user.name}</h2>
                                 </div>
                                 <div className="top-block-right">
                                     <button>block / unblock user</button>
