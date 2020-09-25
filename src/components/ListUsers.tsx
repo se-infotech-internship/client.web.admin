@@ -6,7 +6,10 @@ import List from '@material-ui/core/List';
 import ListItem, { ListItemProps } from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
+
 import UserInfo from './UserInfo';
+
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -15,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) =>
             height: '93vh',
             maxWidth: 360,
             backgroundColor: theme.palette.background.paper,
+            borderRight: '3px solid grey'
         },
     }),
 );
@@ -30,6 +34,8 @@ export default function ListUsers() {
     const [user, setUser] = React.useState({ id: '', name: '' });
 
     const classes = useStyles();
+
+
 
     return (
         <Router>
@@ -49,9 +55,19 @@ export default function ListUsers() {
                 <div className="main-block">
                     <Switch>
                         <Route path={'/' + user.id}>
-                            <p>{user.name}</p>
-                            <h2>{user.id}</h2>
                             {/* <UserInfo /> */}
+                            <div className="top-block">
+                                <div className="top-block-left">
+                                    BLOCK LEFT
+                                    
+                                </div>
+                                <div className="top-block-right">
+                                    BLOCK RIGHT
+                                </div>
+                            </div>
+                            <div className="bottom-block">
+                                bottom block
+                            </div>
                         </Route>
                     </Switch>
                 </div>
