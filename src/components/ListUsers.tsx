@@ -69,24 +69,37 @@ export default function ListUsers() {
         <div className={classes.root}>
           <List>
             {fakeUsers.map((item) => (
-              <ListItem button key={item.id} divider={true}>
-                <Link to={"/" + item.id} style={{ textDecoration: "none" }}>
+              <Link
+                to={"/" + item.id}
+                style={{
+                  textDecoration: "none",
+                  // border: "1px solid green",
+                  // width: "100%",
+                }}
+              >
+                <ListItem
+                  button
+                  key={item.id}
+                  divider={true}
+                  // style={{ border: "1px solid orange" }}
+                  onClick={() =>
+                    setUser({
+                      id: item.id,
+                      name: item.name,
+                      mail: item.mail,
+                      phone: item.phone,
+                      vehNum: item.vehNum,
+                      status: item.status,
+                      photo: item.photo,
+                    })
+                  }
+                >
                   <ListItemText
                     primary={item.name}
-                    onClick={() =>
-                      setUser({
-                        id: item.id,
-                        name: item.name,
-                        mail: item.mail,
-                        phone: item.phone,
-                        vehNum: item.vehNum,
-                        status: item.status,
-                        photo: item.photo,
-                      })
-                    }
+                    // style={{ border: "1px solid red" }}
                   />
-                </Link>
-              </ListItem>
+                </ListItem>
+              </Link>
             ))}
           </List>
         </div>
