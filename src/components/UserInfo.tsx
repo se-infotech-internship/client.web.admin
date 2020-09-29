@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -33,7 +33,7 @@ interface user {
 }
 
 export default function UserInfo(props: user) {
-  const [status, setStatus] = React.useState(props.status);
+  const [status, setStatus] = useState(props.status);
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -62,8 +62,12 @@ export default function UserInfo(props: user) {
             >
               Delete User
             </Button>
-            <Button variant="contained" onClick={handleChangeStatus}>
-              Block/Unblock
+            <Button
+              variant="contained"
+              onClick={handleChangeStatus}
+              color={status ? "default" : "secondary"}
+            >
+              {status ? "Block user" : "Unblock user"}
             </Button>
           </div>
           <p>name: {props.name}</p>
