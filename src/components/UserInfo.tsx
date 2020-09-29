@@ -22,7 +22,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function UserInfo(props: any) {
+interface user {
+  id: string;
+  name: string;
+  mail: string;
+  phone: string;
+  vehNum: string;
+  status: boolean;
+  photo: string;
+}
+
+export default function UserInfo(props: user) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
