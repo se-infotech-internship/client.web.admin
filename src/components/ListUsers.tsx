@@ -14,14 +14,14 @@ import UserInfo from "./UserInfo";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
+    leftList: {
       width: "100%",
       height: "93vh",
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
       borderRight: "3px solid grey",
     },
-    large: {
+    userAvatar: {
       width: theme.spacing(37),
       height: theme.spacing(37),
       margin: "50px auto",
@@ -47,7 +47,7 @@ export default function ListUsers() {
   return (
     <Router>
       <div style={{ display: "flex" }}>
-        <div className={classes.root}>
+        <div className={classes.leftList}>
           <List>
             {usersList.map((user) => (
               <Link
@@ -93,7 +93,7 @@ export default function ListUsers() {
                   <Avatar
                     alt="avatar user"
                     src={userPage.photo}
-                    className={classes.large}
+                    className={classes.userAvatar}
                     variant="rounded"
                   />
                   <h2 style={{ textAlign: "center" }}>{userPage.name}</h2>
