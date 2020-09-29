@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import List from "@material-ui/core/List";
 import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import Avatar from "@material-ui/core/Avatar";
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectUsers, deleteUser } from "../redux/usersSlice";
@@ -20,12 +19,6 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
       borderRight: "3px solid grey",
-    },
-    userAvatar: {
-      width: theme.spacing(37),
-      height: theme.spacing(37),
-      margin: "50px auto",
-      objectFit: "fill",
     },
   })
 );
@@ -87,60 +80,14 @@ export default function ListUsers() {
         <div className="main-block">
           <Switch>
             <Route path={"/" + userPage.id}>
-              {/* <UserInfo /> */}
-              <div className="top-block">
-                <div className="top-block-left">
-                  <Avatar
-                    alt="avatar user"
-                    src={userPage.photo}
-                    className={classes.userAvatar}
-                    variant="rounded"
-                  />
-                  <h2 style={{ textAlign: "center" }}>{userPage.name}</h2>
-                </div>
-                <div className="top-block-right">
-                  <button>block / unblock user</button>
-                  <p>name: {userPage.name}</p>
-                  <p>email: {userPage.mail}</p>
-                  <p>phone: {userPage.phone}</p>
-                  <p>vehicle number: {userPage.vehNum}</p>
-                  <p>staus: {userPage.status ? "Active" : "Block"}</p>
-                  <form>
-                    <textarea id="story" name="story" rows={10} cols={63}>
-                      Send message...
-                    </textarea>
-                    <div>
-                      <input type="submit" value="Send" />
-                    </div>
-                  </form>
-                </div>
-              </div>
-              <div className="bottom-block">
-                <table style={{ width: "98%", margin: "30px auto" }}>
-                  <thead>
-                    <tr>
-                      <th>Header content </th>
-                      <th>Header content </th>
-                      <th>Header content </th>
-                      <th>Header content </th>
-                      <th>Header content </th>
-                      <th>Header content </th>
-                      <th>Header content </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style={{ height: "30vh" }}>
-                      <td>Body content 1</td>
-                      <td>Body content 2</td>
-                      <td>Body content 2</td>
-                      <td>Body content 2</td>
-                      <td>Body content 2</td>
-                      <td>Body content 2</td>
-                      <td>Body content 2</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <UserInfo
+                photo={userPage.photo}
+                name={userPage.name}
+                mail={userPage.mail}
+                phone={userPage.phone}
+                vehNum={userPage.vehNum}
+                status={userPage.status}
+              />
             </Route>
           </Switch>
         </div>
