@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import "./ListUsers.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ListUsers() {
-  const [userPage, setUserPage] = React.useState({
+  const [userPage, setUserPage] = useState({
     id: "",
     name: "",
     mail: "",
@@ -38,60 +38,46 @@ export default function ListUsers() {
   const usersList = useSelector(selectUsers);
 
   return (
-    <Router>
-      <div style={{ display: "flex" }}>
-        <div className={classes.leftList}>
-          <List>
-            {usersList.map((user, index) => (
-              <Link
-                to={"/" + user.id}
-                style={{
-                  textDecoration: "none",
-                  // border: "1px solid green",
-                }}
-                key={index}
-              >
-                <ListItem
-                  button
-                  divider={true}
-                  // style={{ border: "1px solid orange" }}
-                  onClick={() =>
-                    setUserPage({
-                      id: user.id,
-                      name: user.name,
-                      mail: user.mail,
-                      phone: user.phone,
-                      vehNum: user.vehNum,
-                      status: user.status,
-                      photo: user.photo,
-                    })
-                  }
-                >
-                  <ListItemText
-                    primary={user.name}
-                    // style={{ border: "1px solid red" }}
-                  />
-                </ListItem>
-              </Link>
-            ))}
-          </List>
-        </div>
-        <div className="main-block">
-          <Switch>
-            <Route path={"/" + userPage.id}>
-              <UserInfo
-                photo={userPage.photo}
-                name={userPage.name}
-                mail={userPage.mail}
-                phone={userPage.phone}
-                vehNum={userPage.vehNum}
-                status={userPage.status}
-                id={userPage.id}
+    <div style={{ display: "flex" }}>
+      <div className={classes.leftList}>
+        <List>
+          {usersList.map((user) => (
+            <ListItem
+              button
+              divider={true}
+              // style={{ border: "1px solid orange" }}
+              onClick={() =>
+                setUserPage({
+                  id: user.id,
+                  name: user.name,
+                  mail: user.mail,
+                  phone: user.phone,
+                  vehNum: user.vehNum,
+                  status: user.status,
+                  photo: user.photo,
+                })
+              }
+              selected={userPage.id === user.id ? true : false}
+            >
+              <ListItemText
+                primary={user.name}
+                // style={{ border: "1px solid red" }}
               />
-            </Route>
-          </Switch>
-        </div>
+            </ListItem>
+          ))}
+        </List>
       </div>
-    </Router>
+      <div className="main-block">
+        <UserInfo
+          photo={userPage.photo}
+          name={userPage.name}
+          mail={userPage.mail}
+          phone={userPage.phone}
+          vehNum={userPage.vehNum}
+          status={userPage.status}
+          id={userPage.id}
+        />
+      </div>
+    </div>
   );
 }
