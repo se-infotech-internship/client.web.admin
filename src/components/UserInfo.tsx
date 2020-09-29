@@ -33,8 +33,14 @@ interface user {
 }
 
 export default function UserInfo(props: user) {
+  const [status, setStatus] = React.useState(props.status);
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  function handleChangeStatus() {
+    dispatch(changeStatus(props.id));
+    setStatus(!status);
+  }
 
   return (
     <div>
@@ -56,10 +62,7 @@ export default function UserInfo(props: user) {
             >
               Delete User
             </Button>
-            <Button
-              variant="contained"
-              onClick={() => dispatch(changeStatus(props.id))}
-            >
+            <Button variant="contained" onClick={handleChangeStatus}>
               Block/Unblock
             </Button>
           </div>
@@ -67,7 +70,7 @@ export default function UserInfo(props: user) {
           <p>email: {props.mail}</p>
           <p>phone: {props.phone}</p>
           <p>vehicle number: {props.vehNum}</p>
-          <p>staus: {props.status ? "Active" : "Block"}</p>
+          <p>staus: {status ? "Active" : "Block"}</p>
           <form>
             <textarea id="story" name="story" rows={10} cols={63}>
               Send message...
