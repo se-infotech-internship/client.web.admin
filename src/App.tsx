@@ -1,14 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import TopBar from './components/TopBar';
-import ListUsers from './components/ListUsers';
+import SignIn from "./components/SignIn";
+import TopBar from "./components/TopBar";
+import ListUsers from "./components/ListUsers";
 
 export default function App() {
-  return (
+  const [sign, setSign] = React.useState(false);
+
+  const loginScreen = <SignIn />;
+
+  const adminScreen = (
     <React.Fragment>
       <TopBar />
       <ListUsers />
     </React.Fragment>
   );
-}
 
+  return <React.Fragment>{sign ? adminScreen : loginScreen}</React.Fragment>;
+}
