@@ -1,6 +1,10 @@
 import React from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+
+import { useDispatch } from "react-redux";
+import { deleteUser, changeStatus } from "../redux/usersSlice";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -10,11 +14,17 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: "50px auto",
       objectFit: "fill",
     },
+    buttons: {
+      "& > *": {
+        margin: theme.spacing(1),
+      },
+    },
   })
 );
 
 export default function UserInfo(props: any) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -29,7 +39,20 @@ export default function UserInfo(props: any) {
           <h2 style={{ textAlign: "center" }}>{props.name}</h2>
         </div>
         <div className="top-block-right">
-          <button>block / unblock user</button>
+          <div className={classes.buttons}>
+            <Button
+              variant="contained"
+              onClick={() => dispatch(deleteUser(props.id))}
+            >
+              Delete User
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => dispatch(changeStatus(props.id))}
+            >
+              Block/Unblock
+            </Button>
+          </div>
           <p>name: {props.name}</p>
           <p>email: {props.mail}</p>
           <p>phone: {props.phone}</p>

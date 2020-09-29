@@ -42,18 +42,17 @@ export default function ListUsers() {
       <div style={{ display: "flex" }}>
         <div className={classes.leftList}>
           <List>
-            {usersList.map((user) => (
+            {usersList.map((user, index) => (
               <Link
                 to={"/" + user.id}
                 style={{
                   textDecoration: "none",
                   // border: "1px solid green",
-                  // width: "100%",
                 }}
+                key={index}
               >
                 <ListItem
                   button
-                  key={user.id}
                   divider={true}
                   // style={{ border: "1px solid orange" }}
                   onClick={() =>
@@ -87,6 +86,7 @@ export default function ListUsers() {
                 phone={userPage.phone}
                 vehNum={userPage.vehNum}
                 status={userPage.status}
+                id={userPage.id}
               />
             </Route>
           </Switch>
