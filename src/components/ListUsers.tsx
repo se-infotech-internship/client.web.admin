@@ -5,8 +5,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import List from "@material-ui/core/List";
 import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-
 import Avatar from "@material-ui/core/Avatar";
+
+import { useSelector, useDispatch } from "react-redux";
+import { selectUsers, deleteUser } from "../redux/usersSlice";
 
 import UserInfo from "./UserInfo";
 
@@ -28,30 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const fakeUsers = [
-  {
-    id: "123",
-    name: "Louis N. Thomas",
-    mail: "thomas@gmail.com",
-    phone: "+380934562312",
-    vehNum: "AA 94534 KK",
-    status: true,
-    photo: "https://bold.textcontrol.com/images/authors/Bjoern%20Meyer.jpg",
-  },
-  {
-    id: "345",
-    name: "Martina L. Maynes",
-    mail: "martin@gmail.com",
-    phone: "+380354562185",
-    vehNum: "HA 18426 TH",
-    status: false,
-    photo:
-      "https://cdn.pixabay.com/photo/2018/04/04/10/11/portrait-3289372_960_720.jpg",
-  },
-];
-
 export default function ListUsers() {
-  const [user, setUser] = React.useState({
+  const [userPage, setUserPage] = React.useState({
     id: "",
     name: "",
     mail: "",
@@ -62,15 +42,16 @@ export default function ListUsers() {
   });
 
   const classes = useStyles();
+  const usersList = useSelector(selectUsers);
 
   return (
     <Router>
       <div style={{ display: "flex" }}>
         <div className={classes.root}>
           <List>
-            {fakeUsers.map((item) => (
+            {usersList.map((user) => (
               <Link
-                to={"/" + item.id}
+                to={"/" + user.id}
                 style={{
                   textDecoration: "none",
                   // border: "1px solid green",
@@ -79,23 +60,23 @@ export default function ListUsers() {
               >
                 <ListItem
                   button
-                  key={item.id}
+                  key={user.id}
                   divider={true}
                   // style={{ border: "1px solid orange" }}
                   onClick={() =>
-                    setUser({
-                      id: item.id,
-                      name: item.name,
-                      mail: item.mail,
-                      phone: item.phone,
-                      vehNum: item.vehNum,
-                      status: item.status,
-                      photo: item.photo,
+                    setUserPage({
+                      id: user.id,
+                      name: user.name,
+                      mail: user.mail,
+                      phone: user.phone,
+                      vehNum: user.vehNum,
+                      status: user.status,
+                      photo: user.photo,
                     })
                   }
                 >
                   <ListItemText
-                    primary={item.name}
+                    primary={user.name}
                     // style={{ border: "1px solid red" }}
                   />
                 </ListItem>
@@ -105,25 +86,25 @@ export default function ListUsers() {
         </div>
         <div className="main-block">
           <Switch>
-            <Route path={"/" + user.id}>
+            <Route path={"/" + userPage.id}>
               {/* <UserInfo /> */}
               <div className="top-block">
                 <div className="top-block-left">
                   <Avatar
                     alt="avatar user"
-                    src={user.photo}
+                    src={userPage.photo}
                     className={classes.large}
                     variant="rounded"
                   />
-                  <h2 style={{ textAlign: "center" }}>{user.name}</h2>
+                  <h2 style={{ textAlign: "center" }}>{userPage.name}</h2>
                 </div>
                 <div className="top-block-right">
                   <button>block / unblock user</button>
-                  <p>name: {user.name}</p>
-                  <p>email: {user.mail}</p>
-                  <p>phone: {user.phone}</p>
-                  <p>vehicle number: {user.vehNum}</p>
-                  <p>staus: {user.status ? "Active" : "Block"}</p>
+                  <p>name: {userPage.name}</p>
+                  <p>email: {userPage.mail}</p>
+                  <p>phone: {userPage.phone}</p>
+                  <p>vehicle number: {userPage.vehNum}</p>
+                  <p>staus: {userPage.status ? "Active" : "Block"}</p>
                   <form>
                     <textarea id="story" name="story" rows={10} cols={63}>
                       Send message...
