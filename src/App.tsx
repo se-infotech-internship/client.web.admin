@@ -9,6 +9,8 @@ export default function App() {
 
   const loginScreen = <SignIn />;
 
+  console.log('test')
+
   const adminScreen = (
     <React.Fragment>
       <TopBar />
