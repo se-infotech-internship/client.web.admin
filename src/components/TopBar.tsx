@@ -1,10 +1,10 @@
-import React from 'react';
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
+import React from 'react'
+import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import InputBase from '@material-ui/core/InputBase'
+import SearchIcon from '@material-ui/icons/Search'
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,10 +62,10 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
     }),
-);
+)
 
 export default function TopBar() {
-    const classes = useStyles();
+    const classes = useStyles()
 
     return (
         <div className={classes.grow}>
@@ -90,5 +90,5 @@ export default function TopBar() {
                 </Toolbar>
             </AppBar>
         </div>
-    );
+    )
 }

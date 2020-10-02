@@ -1,51 +1,51 @@
-import React, { useState } from "react";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import "./ListUsers.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import List from "@material-ui/core/List";
-import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import React, { useState } from 'react'
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
+import './ListUsers.css'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import List from '@material-ui/core/List'
+import ListItem, { ListItemProps } from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
 
-import { useSelector, useDispatch } from "react-redux";
-import { selectUsers, deleteUser } from "../redux/usersSlice";
+import { useSelector, useDispatch } from 'react-redux'
+import { selectUsers, deleteUser } from '../redux/usersSlice'
 
-import UserInfo from "./UserInfo";
+import UserInfo from './UserInfo'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     leftList: {
-      width: "100%",
-      height: "93vh",
+      width: '100%',
+      height: '93vh',
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
-      borderRight: "3px solid grey",
+      borderRight: '3px solid grey',
     },
   })
-);
+)
 
 export default function ListUsers() {
   const [userPage, setUserPage] = useState({
-    id: "",
-    name: "",
-    mail: "",
-    phone: "",
-    vehNum: "",
+    id: '',
+    name: '',
+    mail: '',
+    phone: '',
+    vehNum: '',
     status: true,
-    photo: "",
-  });
+    photo: '',
+  })
 
-  const classes = useStyles();
-  const usersList = useSelector(selectUsers);
+  const classes = useStyles()
+  const usersList = useSelector(selectUsers)
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: 'flex' }}>
       <div className={classes.leftList}>
         <List>
-          {usersList.map((user) => (
+          {usersList.map(user => (
             <ListItem
               button
               divider={true}
-              // style={{ border: "1px solid orange" }}
+              // style={{ border: '1px solid orange' }}
               onClick={() =>
                 setUserPage({
                   id: user.id,
@@ -61,13 +61,13 @@ export default function ListUsers() {
             >
               <ListItemText
                 primary={user.name}
-                // style={{ border: "1px solid red" }}
+              // style={{ border: '1px solid red' }}
               />
             </ListItem>
           ))}
         </List>
       </div>
-      <div className="main-block">
+      <div className='main-block'>
         <UserInfo
           photo={userPage.photo}
           name={userPage.name}
@@ -79,5 +79,5 @@ export default function ListUsers() {
         />
       </div>
     </div>
-  );
+  )
 }
