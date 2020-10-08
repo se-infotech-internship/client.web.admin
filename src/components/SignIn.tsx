@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -49,6 +49,18 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles()
 
+  async function testClick(event: MouseEvent) {
+    event.preventDefault()
+    const responze = await fetch('http://localhost:5001/api/user/login', {
+      method: 'POST',
+      body: JSON.stringify({ email: 'test@email.com', password: '123' })
+    })
+
+    console.log(responze)
+  }
+
+
+
   return (
     <Container component='main' maxWidth='xs'>
       <CssBaseline />
@@ -81,6 +93,7 @@ export default function SignIn() {
             type='password'
             id='password'
             autoComplete='current-password'
+
           />
           <FormControlLabel
             control={<Checkbox value='remember' color='primary' />}
@@ -92,10 +105,11 @@ export default function SignIn() {
             variant='contained'
             color='primary'
             className={classes.submit}
+            onClick={testClick}
           >
             Sign In
           </Button>
-          {/* <Grid container>
+          <Grid container>
             <Grid item xs>
               <Link href='#' variant='body2'>
                 Forgot password?
@@ -103,10 +117,10 @@ export default function SignIn() {
             </Grid>
             <Grid item>
               <Link href='#' variant='body2'>
-                {'Don't have an account? Sign Up'}
+                'Don't have an account? Sign Up'
               </Link>
             </Grid>
-          </Grid> */}
+          </Grid>
         </form>
       </div>
       <Box mt={8}>
