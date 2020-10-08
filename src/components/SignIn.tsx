@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react'
+import React, { useState, MouseEvent } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -46,19 +46,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+
+
 export default function SignIn() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
   const classes = useStyles()
 
-  async function testClick(event: MouseEvent) {
+  async function handleClick(event: MouseEvent) {
     event.preventDefault()
-    const responze = await fetch('http://localhost:5001/api/user/login', {
+    const response = await fetch('http://localhost:5001/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ email: 'test@email.com', password: '123' })
+      body: JSON.stringify({ email, password })
     })
 
-    console.log(responze)
+    console.log(response)
+    // console.log(email, password)
   }
 
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value)
+  }
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value)
+  }
 
 
   return (
@@ -82,6 +95,7 @@ export default function SignIn() {
             name='email'
             autoComplete='email'
             autoFocus
+            onChange={handleEmail}
           />
           <TextField
             variant='outlined'
@@ -93,7 +107,7 @@ export default function SignIn() {
             type='password'
             id='password'
             autoComplete='current-password'
-
+            onChange={handlePassword}
           />
           <FormControlLabel
             control={<Checkbox value='remember' color='primary' />}
@@ -105,7 +119,7 @@ export default function SignIn() {
             variant='contained'
             color='primary'
             className={classes.submit}
-            onClick={testClick}
+            onClick={handleClick}
           >
             Sign In
           </Button>
