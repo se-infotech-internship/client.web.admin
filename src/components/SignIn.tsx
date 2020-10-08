@@ -63,6 +63,8 @@ export default function SignIn() {
 
     console.log(response)
     // console.log(email, password)
+    setEmail('')
+    setPassword('')
   }
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,6 +97,7 @@ export default function SignIn() {
             name='email'
             autoComplete='email'
             autoFocus
+            value={email}
             onChange={handleEmail}
           />
           <TextField
@@ -107,6 +110,7 @@ export default function SignIn() {
             type='password'
             id='password'
             autoComplete='current-password'
+            value={password}
             onChange={handlePassword}
           />
           <FormControlLabel
