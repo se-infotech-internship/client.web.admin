@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import InputBase from '@material-ui/core/InputBase'
 import SearchIcon from '@material-ui/icons/Search'
+import Button from '@material-ui/core/Button';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -69,11 +70,7 @@ const token = window.localStorage.getItem('token')
 export default function TopBar() {
     const classes = useStyles()
 
-
-
-
     const logout = (event: MouseEvent) => window.localStorage.clear() // clear ALL !!! localStorage
-
 
 
     return (
@@ -96,7 +93,13 @@ export default function TopBar() {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
-                    <button onClick={logout}>LOGOUT</button>
+                    <Button
+                        variant="outlined"
+                        color="inherit"
+                        onClick={logout}
+                    >
+                        Вийти
+                         </Button>
                 </Toolbar>
             </AppBar>
         </div>
