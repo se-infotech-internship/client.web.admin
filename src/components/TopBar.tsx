@@ -93,13 +93,13 @@ export default function TopBar() {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
-                    <Button
+                    {/* <Button
                         variant="outlined"
                         color="inherit"
                         onClick={logout}
                     >
                         Вийти
-                         </Button>
+                         </Button> */}
                 </Toolbar>
             </AppBar>
         </div>
