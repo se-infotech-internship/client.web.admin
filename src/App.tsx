@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import SignIn from './components/SignIn'
 import TopBar from './components/TopBar'
 import ListUsers from './components/ListUsers'
 
+const token = window.localStorage.getItem('token')
+
 export default function App() {
-  const [sign, setSign] = React.useState(false)
+  const [successLogin, setSuccessLogin] = useState(false)
+
+  useEffect(() => {
+    if (token) {
+      setSuccessLogin(true)
+    }
+  }, []);
+
 
   const loginScreen = <SignIn />
 
@@ -14,11 +23,11 @@ export default function App() {
       <TopBar />
       <ListUsers />
     </React.Fragment>
-  );
+  )
 
   return (
     <React.Fragment>
-      {sign ? adminScreen : loginScreen}
+      {successLogin ? adminScreen : loginScreen}
     </React.Fragment>
   )
 }

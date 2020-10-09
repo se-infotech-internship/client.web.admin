@@ -54,14 +54,23 @@ export default function SignIn() {
 
   const classes = useStyles()
 
+  const body = JSON.stringify({ email, password })
+
   async function handleClick(event: MouseEvent) {
     event.preventDefault()
     const response = await fetch('http://localhost:5001/api/user/login', {
       method: 'POST',
-      body: JSON.stringify({ email, password })
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: body,
     })
 
-    console.log(response)
+    const result = await response.json()
+
+    window.localStorage.setItem('token', result.token)
+
+    console.log(result)
     // console.log(email, password)
     setEmail('')
     setPassword('')

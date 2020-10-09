@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent, useEffect } from 'react'
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -64,8 +64,17 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 )
 
+const token = window.localStorage.getItem('token')
+
 export default function TopBar() {
     const classes = useStyles()
+
+
+
+
+    const logout = (event: MouseEvent) => window.localStorage.clear() // clear ALL !!! localStorage
+
+
 
     return (
         <div className={classes.grow}>
@@ -87,6 +96,7 @@ export default function TopBar() {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
+                    <button onClick={logout}>LOGOUT</button>
                 </Toolbar>
             </AppBar>
         </div>
