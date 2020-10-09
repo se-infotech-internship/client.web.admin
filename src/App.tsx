@@ -1,33 +1,22 @@
 import React, { useState, useEffect } from 'react'
 
-import SignIn from './components/SignIn'
+import Box from '@material-ui/core/Box';
+
+import LoginPage from './components/LoginPage'
 import TopBar from './components/TopBar'
 import ListUsers from './components/ListUsers'
 
 const token = window.localStorage.getItem('token')
 
 export default function App() {
-  const [successLogin, setSuccessLogin] = useState(true)
-
-  useEffect(() => {
-    if (token) {
-      setSuccessLogin(true)
-    }
-  }, []);
-
-
-  const loginScreen = <SignIn />
-
-  const adminScreen = (
-    <React.Fragment>
-      <TopBar />
-      <ListUsers />
-    </React.Fragment>
-  )
 
   return (
     <React.Fragment>
-      {successLogin ? adminScreen : loginScreen}
+      {/* <LoginPage /> */}
+      <TopBar />
+      <Box>
+        <ListUsers />
+      </Box>
     </React.Fragment>
   )
 }

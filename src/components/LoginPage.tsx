@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function SignIn() {
+export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
