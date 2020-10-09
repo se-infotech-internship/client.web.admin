@@ -67,17 +67,6 @@ export default function ListUsers() {
           ))}
         </List>
       </div>
-      <div className='main-block'>
-        <UserInfo
-          photo={userPage.photo}
-          name={userPage.name}
-          mail={userPage.mail}
-          phone={userPage.phone}
-          vehNum={userPage.vehNum}
-          status={userPage.status}
-          id={userPage.id}
-        />
-      </div>
     </div>
   )
 }

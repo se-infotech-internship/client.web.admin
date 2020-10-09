@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 
 import LoginPage from './components/LoginPage'
 import TopBar from './components/TopBar'
-import ListUsers from './components/ListUsers'
+import LeftPanel from './components/LeftPanel'
 
 const token = window.localStorage.getItem('token')
 
@@ -15,7 +15,7 @@ export default function App() {
       {/* <LoginPage /> */}
       <TopBar />
       <Box>
-        <ListUsers />
+        <LeftPanel />
       </Box>
     </React.Fragment>
   )
