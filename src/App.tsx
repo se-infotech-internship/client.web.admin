@@ -1,8 +1,11 @@
 import React from 'react'
 
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
-import TopBar from './components/TopBar'
-import ListUsers from './components/ListUsers/List.users'
+import { HomePage } from './components/homepage/HomePage'
+import { PrivateRoute } from './PrivateRoute'
+
+
 
 
 const token = window.localStorage.getItem('token')
@@ -11,9 +14,8 @@ export default function App() {
 
   return (
     <React.Fragment>
-      {/* <LoginPage /> */}
-      <TopBar />
-      <ListUsers />
+      <LoginPage />
+      {/* <HomePage /> */}
     </React.Fragment>
   )
 }
