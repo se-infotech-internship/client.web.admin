@@ -24,7 +24,7 @@ const fakeUsers = [
     },
 ]
 
-export default function BasicTable() {
+export default function TableUsers() {
     const classes = useStyles();
 
     return (
