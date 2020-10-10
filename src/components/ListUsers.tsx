@@ -1,45 +1,57 @@
-import * as React from 'react';
-import { DataGrid, ColDef, ValueGetterParams } from '@material-ui/data-grid';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-const columns: ColDef[] = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
+const useStyles = makeStyles({
+    table: {
+        minWidth: 650,
+    },
+});
+
+const fakeUsers = [
     {
-        field: 'age',
-        headerName: 'Age',
-        type: 'number',
-        width: 90,
+        id: '123', name: 'Louis N. Thomas', mail: 'thomas@gmail.com', phone: '+380934562312', vehNum: 'AA 94534 KK', status: true,
+
     },
     {
-        field: 'fullName',
-        headerName: 'Full name',
-        description: 'This column has a value getter and is not sortable.',
-        sortable: false,
-        width: 160,
-        valueGetter: (params: ValueGetterParams) =>
-            `${params.getValue('firstName') || ''} ${params.getValue('lastName') || ''
-            }`,
+        id: '456', name: 'Martina L. Maynes', mail: 'martin@gmail.com', phone: '+380354562185', vehNum: 'HA 18426 TH', status: true,
     },
-];
+]
 
-const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+export default function BasicTable() {
+    const classes = useStyles();
 
-export default function DataGridDemo() {
     return (
-        <div style={{ height: 400, width: '100%' }}>
-            <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
-        </div>
+        <TableContainer component={Paper}>
+            <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Ім'я</TableCell>
+                        <TableCell >Номер ТЗ</TableCell>
+                        <TableCell >Телефон користувача</TableCell>
+                        <TableCell >Статус</TableCell>
+                        <TableCell >Email</TableCell>
+                    </TableRow>
+                </TableHead>
+
+                <TableBody>
+                    {fakeUsers.map((fakeUser) => (
+                        <TableRow onClick={() => console.log(fakeUser.name)} key={fakeUser.id}>
+                            <TableCell >{fakeUser.name}</TableCell>
+                            <TableCell >{fakeUser.vehNum}</TableCell>
+                            <TableCell >{fakeUser.phone}</TableCell>
+                            <TableCell >{fakeUser.status ? 'Активований' : 'Заблокований'}</TableCell>
+                            <TableCell >{fakeUser.mail}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
-
