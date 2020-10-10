@@ -3,8 +3,6 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 
-import { useDispatch } from 'react-redux'
-import { deleteUser, changeStatus } from '../redux/usersSlice'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,12 +33,7 @@ interface user {
 export default function UserInfo(props: user) {
   const [status, setStatus] = useState(props.status)
   const classes = useStyles()
-  const dispatch = useDispatch()
 
-  function handleChangeStatus() {
-    dispatch(changeStatus(props.id))
-    setStatus(!status)
-  }
 
   return (
     <div>
@@ -58,13 +51,12 @@ export default function UserInfo(props: user) {
           <div className={classes.buttons}>
             <Button
               variant='contained'
-              onClick={() => dispatch(deleteUser(props.id))}
             >
               Delete User
             </Button>
             <Button
               variant='contained'
-              onClick={handleChangeStatus}
+
               color={status ? 'default' : 'secondary'}
             >
               {status ? 'Block user' : 'Unblock user'}

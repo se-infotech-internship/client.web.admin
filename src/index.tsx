@@ -3,13 +3,12 @@ import ReactDOM from 'react-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import App from './App'
 
-import { store } from './redux/store'
-import { Provider } from 'react-redux'
+
 
 ReactDOM.render(
-  <Provider store={store}>
+  <React.Fragment>
     <CssBaseline />
     <App />
-  </Provider>,
+  </React.Fragment>,
   document.querySelector('#root')
 )

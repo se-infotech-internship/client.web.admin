@@ -18,7 +18,7 @@ function Copyright() {
     <Typography variant='body2' color='textSecondary' align='center'>
       {'Copyright © '}
       <Link color='inherit' href='#'>
-        Your Website
+        SmartRadar
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -70,7 +70,7 @@ export default function LoginPage() {
 
     window.localStorage.setItem('token', result.token)
 
-    console.log(result)
+    console.log(result.token)
     // console.log(email, password)
     setEmail('')
     setPassword('')
@@ -136,7 +136,7 @@ export default function LoginPage() {
           >
             Sign In
           </Button>
-          <Grid container>
+          {/* <Grid container>
             <Grid item xs>
               <Link href='#' variant='body2'>
                 Forgot password?
@@ -147,7 +147,7 @@ export default function LoginPage() {
                 'Don't have an account? Sign Up'
               </Link>
             </Grid>
-          </Grid>
+          </Grid> */}
         </form>
       </div>
       <Box mt={8}>
