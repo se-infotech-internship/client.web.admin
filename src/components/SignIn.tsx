@@ -58,7 +58,7 @@ export default function SignIn() {
 
   async function handleClick(event: MouseEvent) {
     event.preventDefault()
-    const response = await fetch('http://localhost:5001/api/user/login', {
+    const response = await fetch('http://localhost:5001/api/admin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'

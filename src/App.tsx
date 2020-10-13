@@ -7,13 +7,13 @@ import ListUsers from './components/ListUsers'
 const token = window.localStorage.getItem('token')
 
 export default function App() {
-  const [successLogin, setSuccessLogin] = useState(true)
+  const [successLogin, setSuccessLogin] = useState(false)
 
-  useEffect(() => {
-    if (token) {
-      setSuccessLogin(true)
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (token) {
+  //     setSuccessLogin(true)
+  //   }
+  // }, []);
 
 
   const loginScreen = <SignIn />
