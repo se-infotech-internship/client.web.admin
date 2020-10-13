@@ -14,13 +14,13 @@ export default function App() {
   return (
     <React.Fragment>
       <Router history={history}>
-        <div>
+        {/* <div>
           <PrivateRoute exact path="/" component={HomePage} />
           <Route path="/login" component={LoginPage} />
-        </div>
+        </div> */}
       </Router>
       {/* <LoginPage /> */}
-      {/* <HomePage /> */}
+      <HomePage />
     </React.Fragment>
   )
 }
