@@ -4,7 +4,7 @@ import TopBar from '../TopBar'
 import LeftPanel from '../LeftPanel'
 import TableUsers from '../TableUsers'
 
-export const HomePage = () => {
+export default function HomePage() {
     return (
         <React.Fragment>
             <TopBar />
