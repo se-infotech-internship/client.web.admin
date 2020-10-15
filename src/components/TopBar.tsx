@@ -94,15 +94,17 @@ export default function TopBar() {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
-                    <Button
-                        variant="outlined"
-                        color="inherit"
-                        onClick={() => dispatch(logout())}
-                    >
-                        Вийти
+                    <div style={{ marginLeft: "62.5%" }}>
+                        <Button
+                            variant="outlined"
+                            color="inherit"
+                            onClick={() => dispatch(logout())}
+                        >
+                            Вийти
                          </Button>
+                    </div>
                 </Toolbar>
             </AppBar>
-        </div>
+        </div >
     )
 }
