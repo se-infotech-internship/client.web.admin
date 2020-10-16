@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <div>
-      {!isAuth ? <HomePage /> : <LoginPage />}
+      {isAuth ? <HomePage /> : <LoginPage />}
     </div>
   );
 }
