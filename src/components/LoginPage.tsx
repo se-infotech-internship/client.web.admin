@@ -52,25 +52,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-<<<<<<< HEAD:src/components/LoginPage.tsx
   const dispatch = useDispatch();
-=======
-  const classes = useStyles()
-
-  const body = JSON.stringify({ email, password })
-
-  async function handleClick(event: MouseEvent) {
-    event.preventDefault()
-    const response = await fetch('http://localhost:5001/api/admin/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json;charset=utf-8'
-      },
-      body: body,
-    })
-
-    const result = await response.json()
->>>>>>> d469f9b18b6d598ccaa6c5032aaac7db951d96a9:src/components/SignIn.tsx
 
   const classes = useStyles()
 
