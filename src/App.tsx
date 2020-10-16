@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 
-import SignIn from './components/SignIn'
-import TopBar from './components/TopBar'
-import ListUsers from './components/ListUsers'
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/store';
 
-const token = window.localStorage.getItem('token')
+import LoginPage from './components/LoginPage'
+import HomePage from './components/homepage/HomePage'
 
+<<<<<<< HEAD
+=======
 export default function App() {
   const [successLogin, setSuccessLogin] = useState(false)
 
@@ -14,20 +16,15 @@ export default function App() {
   //     setSuccessLogin(true)
   //   }
   // }, []);
+>>>>>>> d469f9b18b6d598ccaa6c5032aaac7db951d96a9
 
 
-  const loginScreen = <SignIn />
-
-  const adminScreen = (
-    <React.Fragment>
-      <TopBar />
-      <ListUsers />
-    </React.Fragment>
-  )
+export default function App() {
+  const isAuth = useSelector((state: RootState) => state.user.isAuth);
 
   return (
-    <React.Fragment>
-      {successLogin ? adminScreen : loginScreen}
-    </React.Fragment>
-  )
+    <div>
+      {isAuth ? <HomePage /> : <LoginPage />}
+    </div>
+  );
 }

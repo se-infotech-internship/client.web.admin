@@ -1,11 +1,14 @@
-import React, { MouseEvent, useEffect } from 'react'
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import InputBase from '@material-ui/core/InputBase'
-import SearchIcon from '@material-ui/icons/Search'
+import React from 'react';
+import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
+
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/actions';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -65,13 +68,11 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 )
 
-const token = window.localStorage.getItem('token')
+
 
 export default function TopBar() {
-    const classes = useStyles()
-
-    const logout = (event: MouseEvent) => window.localStorage.clear() // clear ALL !!! localStorage
-
+    const classes = useStyles();
+    const dispatch = useDispatch();
 
     return (
         <div className={classes.grow}>
@@ -93,15 +94,17 @@ export default function TopBar() {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </div>
-                    <Button
-                        variant="outlined"
-                        color="inherit"
-                        onClick={logout}
-                    >
-                        Вийти
+                    <div style={{ marginLeft: "62.5%" }}>
+                        <Button
+                            variant="outlined"
+                            color="inherit"
+                            onClick={() => dispatch(logout())}
+                        >
+                            Вийти
                          </Button>
+                    </div>
                 </Toolbar>
             </AppBar>
-        </div>
+        </div >
     )
 }
