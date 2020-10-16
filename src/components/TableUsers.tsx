@@ -10,7 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 interface Column {
-    id: 'name' | 'code' | 'population' | 'size';
+    id: 'name' | 'username' | 'email' | 'phone';
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -19,17 +19,17 @@ interface Column {
 
 const columns: Column[] = [
     { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+    { id: 'username', label: 'Username', minWidth: 100 },
     {
-        id: 'population',
-        label: 'Population',
+        id: 'email',
+        label: 'Email',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
     },
     {
-        id: 'size',
-        label: 'Size\u00a0(km\u00b2)',
+        id: 'phone',
+        label: 'Phone',
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
@@ -57,32 +57,7 @@ const columns: Column[] = [
 // }
 
 const rows = [
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-    { name: 'India', code: 'IN', population: 1324171354, size: 3287263 },
-
+    { name: 'India', username: 'IN', email: 'test@email.com', phone: '3287263' },
 ];
 
 const useStyles = makeStyles({
@@ -128,7 +103,7 @@ export default function TableUsers() {
                     <TableBody>
                         {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                             return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
                                     {columns.map((column) => {
                                         const value = row[column.id];
                                         return (
