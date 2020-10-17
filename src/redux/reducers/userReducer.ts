@@ -58,12 +58,14 @@ export const login = (email: string, password: string) => {
 }
 
 
-export const getUsers = () => async (dispatch: AppDispatch) => {
+export const getUsers = (page: number, rows: number) => async (dispatch: AppDispatch) => {
     try {
-        const response = await fetch(`http://localhost:5001/api/admin/users/?page=1&quantity=10`);
+        console.log(`${page} ${rows}`)
+        const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page + 1}&quantity=${rows}`);
         const result = await response.json();
-        console.log(result)
+
         dispatch(getUsersAction(result.rows));
+        console.log(result)
     } catch (error) {
         console.log(error)
     }

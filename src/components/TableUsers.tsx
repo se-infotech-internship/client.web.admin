@@ -84,8 +84,8 @@ export default function TableUsers() {
     const rows = useSelector((state: any) => state.user.usersBase);
     const dispatch = useDispatch();
     React.useEffect(() => {
-        dispatch(getUsers())
-    }, [])
+        dispatch(getUsers(page, rowsPerPage))
+    }, [page, rowsPerPage])
 
 
     /////////////FETCH USERS IN LOCAL SATE
@@ -114,7 +114,7 @@ export default function TableUsers() {
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
-        setPage(0);
+        setPage(1);
     };
 
     return (
@@ -135,7 +135,7 @@ export default function TableUsers() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => {
+                        {rows.map((row: any) => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
                                     {columns.map((column) => {
@@ -155,7 +155,7 @@ export default function TableUsers() {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
+                count={rows.length}  // сюда передать count из ридакс
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
