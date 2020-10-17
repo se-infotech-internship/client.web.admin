@@ -60,10 +60,10 @@ export const login = (email: string, password: string) => {
 
 export const getUsers = () => async (dispatch: AppDispatch) => {
     try {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+        const response = await fetch(`http://localhost:5001/api/admin/users/?page=1&quantity=10`);
         const result = await response.json();
         console.log(result)
-        dispatch(getUsersAction(result));
+        dispatch(getUsersAction(result.rows));
     } catch (error) {
         console.log(error)
     }
