@@ -9,7 +9,8 @@ import HomePage from './components/homepage/HomePage'
 
 
 export default function App() {
-  const isAuth = useSelector((state: RootState) => state.user.isAuth);
+  // С RootState  не работает, исправить
+  const isAuth = useSelector((state: any) => state.user.isAuth);
 
   return (
     <div>

@@ -56,9 +56,11 @@ const columns: Column[] = [
 //     return { name, code, population, size, density };
 // }
 
-const rows = [
-    { name: 'India', username: 'IN', email: 'test@email.com', phone: '3287263' },
-];
+// const rows = [
+//     { id: 0, name: 'India', username: 'IN', email: 'test@email.com', phone: '3287263' },
+// ];
+
+
 
 const useStyles = makeStyles({
     root: {
@@ -73,6 +75,24 @@ export default function TableUsers() {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+
+    /////////////FETCH USERS IN LOCAL SATE
+    interface IRows {
+        id: number;
+        name: string;
+        username: string;
+        email: string;
+        phone: string;
+    }
+    const [rows, setRows] = React.useState<IRows[]>([]);
+    React.useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(user => { setRows(user) })
+    });
+    /////////////FETCH USERS IN LOCAL SATE
+
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);

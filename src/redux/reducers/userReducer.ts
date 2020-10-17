@@ -2,8 +2,10 @@ import { SET_USER, LOGOUT, Actions, setUser } from '../actions';
 import { AppDispatch } from '../store';
 
 
+
 const initialState = {
-    isAuth: false
+    isAuth: false,
+    usersBase: []
 }
 
 export default function userReducer(state = initialState, action: Actions) {
