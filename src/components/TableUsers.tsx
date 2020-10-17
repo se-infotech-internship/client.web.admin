@@ -9,6 +9,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getUsers } from '../redux/reducers/userReducer';
+
 interface Column {
     id: 'name' | 'username' | 'email' | 'phone';
     label: string;
@@ -77,7 +81,15 @@ export default function TableUsers() {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
 
+    const rows = useSelector((state: any) => state.user.usersBase);
+    const dispatch = useDispatch();
+    React.useEffect(() => {
+        dispatch(getUsers())
+    }, [])
+
+
     /////////////FETCH USERS IN LOCAL SATE
+    /*
     interface IRows {
         id: number;
         name: string;
@@ -90,7 +102,9 @@ export default function TableUsers() {
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(user => { setRows(user) })
+            
     });
+     */
     /////////////FETCH USERS IN LOCAL SATE
 
 
@@ -121,7 +135,7 @@ export default function TableUsers() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
                                     {columns.map((column) => {

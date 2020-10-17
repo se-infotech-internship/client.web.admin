@@ -1,6 +1,7 @@
-import { SET_USER, LOGOUT, Actions, setUser } from '../actions';
+import { SET_USER, LOGOUT, GET_USERS, Actions, setUser, getUsersAction } from '../actions';
 import { AppDispatch } from '../store';
 
+import axios from 'axios'
 
 
 const initialState = {
@@ -19,6 +20,11 @@ export default function userReducer(state = initialState, action: Actions) {
             localStorage.removeItem('token');
             return {
                 isAuth: false
+            }
+        case GET_USERS:
+            return {
+                ...state,
+                usersBase: action.payload
             }
         default:
             return state;
@@ -50,3 +56,15 @@ export const login = (email: string, password: string) => {
         }
     }
 }
+
+
+export const getUsers = () => async (dispatch: AppDispatch) => {
+    try {
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/users`);
+
+        console.log(res)
+        dispatch(getUsersAction(res.data));
+    } catch (error) {
+        console.log(error)
+    }
+};
