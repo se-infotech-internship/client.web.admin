@@ -27,10 +27,10 @@ export default function ListUsers() {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div className={classes.leftList}>
         <div style={{ textAlign: 'center', marginTop: 30 }}>
-          <Button variant="outlined">Шаблони повідомлень</Button>
+          <Button color="primary" variant="contained">Шаблони повідомлень</Button>
         </div>
         <div style={{ textAlign: 'center', marginTop: 30 }}>
-          <Button variant="outlined">Відправити повідомлення</Button>
+          <Button color="primary" variant="contained">Відправити повідомлення</Button>
         </div>
         <div style={{ textAlign: 'center', marginTop: 30 }}>
           <FormControl component="fieldset">

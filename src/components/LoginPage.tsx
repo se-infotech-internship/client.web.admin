@@ -49,12 +49,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function LoginPage() {
+  const classes = useStyles()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch();
-
-  const classes = useStyles()
 
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
