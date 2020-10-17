@@ -1,7 +1,7 @@
 import { SET_USER, LOGOUT, GET_USERS, Actions, setUser, getUsersAction } from '../actions';
 import { AppDispatch } from '../store';
 
-import axios from 'axios'
+// import axios from 'axios';
 
 
 const initialState = {
@@ -60,10 +60,10 @@ export const login = (email: string, password: string) => {
 
 export const getUsers = () => async (dispatch: AppDispatch) => {
     try {
-        const res = await axios.get(`https://jsonplaceholder.typicode.com/users`);
-
-        console.log(res)
-        dispatch(getUsersAction(res.data));
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users`);
+        const result = await response.json();
+        console.log(result)
+        dispatch(getUsersAction(result));
     } catch (error) {
         console.log(error)
     }
