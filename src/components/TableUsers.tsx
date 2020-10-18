@@ -15,7 +15,7 @@ import { RootState } from '../redux/store';
 import { getUsers } from '../redux/reducers/userReducer';
 
 interface Column {
-    id: 'name' | 'username' | 'email' | 'phone';
+    id: 'name' | 'secondName' | 'email' | 'phone';
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -23,21 +23,21 @@ interface Column {
 }
 
 const columns: Column[] = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'username', label: 'Username', minWidth: 100 },
+    { id: 'name', label: `Ім'я`, minWidth: 170 },
+    { id: 'secondName', label: 'Призвище', minWidth: 170 },
     {
         id: 'email',
         label: 'Email',
         minWidth: 170,
-        align: 'right',
-        format: (value: number) => value.toLocaleString('en-US'),
+        // align: 'right',
+        // format: (value: number) => value.toLocaleString('en-US'),
     },
     {
         id: 'phone',
-        label: 'Phone',
+        label: 'Телефон',
         minWidth: 170,
-        align: 'right',
-        format: (value: number) => value.toLocaleString('en-US'),
+        // align: 'right',
+        // format: (value: number) => value.toLocaleString('en-US'),
     },
 ];
 
@@ -60,7 +60,7 @@ export default function TableUsers() {
     const rows = useSelector((state: RootState) => state.users.rowsUsers)
     const countState = useSelector((state: RootState) => state.users.countUsers)
     // console.log(`${countState} this is test`)
-    // console.log(`${rows} this is test`)
+    console.log(`${rows} this is test`)
 
     const dispatch = useDispatch()
     React.useEffect(() => {
