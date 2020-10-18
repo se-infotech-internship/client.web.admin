@@ -14,6 +14,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { getUsers } from '../redux/reducers/userReducer';
 
+import { Link } from 'react-router-dom';
+
 interface Column {
     id: 'name' | 'secondName' | 'email' | 'phone';
     label: string;
@@ -77,7 +79,6 @@ export default function TableUsers() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
     return (
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
@@ -103,7 +104,9 @@ export default function TableUsers() {
                                         const value = row[column.id];
                                         return (
                                             <TableCell key={column.id} align={column.align}>
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                <Link to="/user" >
+                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                </Link>
                                             </TableCell>
                                         );
                                     })}
