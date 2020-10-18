@@ -11,10 +11,8 @@ export default function App() {
 
   return (
     <div>
-      {isAuth ? <HomePage /> : <LoginPage />}
-      {/* <LoginPage /> */}
+      {!isAuth ? <HomePage /> : <LoginPage />}
     </div>
-
   );
 }
 

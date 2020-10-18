@@ -77,12 +77,15 @@ const useStyles = makeStyles({
 });
 
 export default function TableUsers() {
-    const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const classes = useStyles()
+    const [page, setPage] = React.useState(0)
+    const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
 
-    const rows = useSelector((state: RootState) => state.users.allUsers);
+    const rows = useSelector((state: RootState) => state.users.rowsUsers)
+    const countState = useSelector((state: RootState) => state.users.countUsers)
+
+    console.log(`${countState} this is test`)
     // console.log(`${rows} this is test`)
     const dispatch = useDispatch();
     React.useEffect(() => {
