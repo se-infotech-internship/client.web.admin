@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     leftList: {
       width: 330,
-      height: '93vh',
+      height: '100vh',
       // maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
       borderRight: '3px solid grey',

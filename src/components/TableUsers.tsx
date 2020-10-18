@@ -39,32 +39,7 @@ const columns: Column[] = [
         align: 'right',
         format: (value: number) => value.toLocaleString('en-US'),
     },
-    // {
-    //     // id: 'density',
-    //     label: 'Density',
-    //     minWidth: 170,
-    //     align: 'right',
-    //     format: (value: number) => value.toFixed(2),
-    // },
 ];
-
-// interface Data {
-//     name: string;
-//     code: string;
-//     population: number;
-//     size: number;
-//     density: number;
-// }
-
-// function createData(name: string, code: string, population: number, size: number): Data {
-//     const density = population / size;
-//     return { name, code, population, size, density };
-// }
-
-// const rows = [
-//     { id: 0, name: 'India', username: 'IN', email: 'test@email.com', phone: '3287263' },
-// ];
-
 
 
 const useStyles = makeStyles({
@@ -84,34 +59,14 @@ export default function TableUsers() {
 
     const rows = useSelector((state: RootState) => state.users.rowsUsers)
     const countState = useSelector((state: RootState) => state.users.countUsers)
-
-    console.log(`${countState} this is test`)
+    // console.log(`${countState} this is test`)
     // console.log(`${rows} this is test`)
-    const dispatch = useDispatch();
+
+    const dispatch = useDispatch()
     React.useEffect(() => {
         dispatch(getUsers(page, rowsPerPage))
     }, [page, rowsPerPage])
 
-
-
-    /////////////FETCH USERS IN LOCAL SATE
-    /*
-    interface IRows {
-        id: number;
-        name: string;
-        username: string;
-        email: string;
-        phone: string;
-    }
-    const [rows, setRows] = React.useState<IRows[]>([]);
-    React.useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(user => { setRows(user) })
-
-    });
-    */
-    /////////////FETCH USERS IN LOCAL SATE
 
 
     const handleChangePage = (event: unknown, newPage: number) => {
@@ -120,7 +75,7 @@ export default function TableUsers() {
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
-        setPage(1);
+        // setPage(1);
     };
 
     return (
@@ -143,7 +98,7 @@ export default function TableUsers() {
                     <TableBody>
                         {rows.map((row: any) => {
                             return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                                     {columns.map((column) => {
                                         const value = row[column.id];
                                         return (
@@ -161,7 +116,7 @@ export default function TableUsers() {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}  // сюда передать count из ридакс
+                count={countState}  // сюда передать count из ридакс
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
