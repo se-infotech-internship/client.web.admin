@@ -8,7 +8,8 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 
 import { useDispatch } from 'react-redux';
-import { logout } from '../redux/actions';
+// import { logout } from '../redux/actions';
+import { logout } from '../redux/reducers/userReducer';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -74,6 +75,11 @@ export default function TopBar() {
     const classes = useStyles();
     const dispatch = useDispatch();
 
+    function handleClick() {
+        localStorage.removeItem('token');
+        dispatch(logout());
+    }
+
     return (
         <div className={classes.grow}>
             <AppBar position="static">
@@ -98,7 +104,8 @@ export default function TopBar() {
                         <Button
                             variant="outlined"
                             color="inherit"
-                            onClick={() => dispatch(logout())}
+                            onClick={handleClick}
+                        // onClick={() => dispatch(logout())}
                         >
                             Вийти
                          </Button>

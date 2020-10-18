@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import { getUsers } from '../redux/reducers/userReducer';
 
 interface Column {
@@ -81,11 +82,13 @@ export default function TableUsers() {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
 
-    const rows = useSelector((state: any) => state.user.usersBase);
+    const rows = useSelector((state: RootState) => state.users.allUsers);
+    // console.log(`${rows} this is test`)
     const dispatch = useDispatch();
     React.useEffect(() => {
         dispatch(getUsers(page, rowsPerPage))
     }, [page, rowsPerPage])
+
 
 
     /////////////FETCH USERS IN LOCAL SATE
@@ -102,9 +105,9 @@ export default function TableUsers() {
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
             .then(user => { setRows(user) })
-            
+
     });
-     */
+    */
     /////////////FETCH USERS IN LOCAL SATE
 
 

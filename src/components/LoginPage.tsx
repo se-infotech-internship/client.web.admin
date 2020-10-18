@@ -67,6 +67,8 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(login(email, password));
+    setEmail('');
+    setPassword('');
     // console.log(`${email} ${password}`);
   }
 

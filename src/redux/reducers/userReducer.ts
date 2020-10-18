@@ -1,3 +1,89 @@
+import { createSlice } from '@reduxjs/toolkit'
+import { AppDispatch } from '../store'
+
+
+export const usersSlice = createSlice({
+    name: 'users',
+    initialState: {
+        isAuth: false,
+        allUsers: []
+    },
+    reducers: {
+        authUser: state => {
+            state.isAuth = true
+        },
+        logout: state => {
+            state.isAuth = false
+        },
+        fetchUsers: (state, action) => {
+            state.allUsers = action.payload
+        }
+    }
+});
+
+export const { authUser, logout, fetchUsers } = usersSlice.actions
+
+
+
+export const login = (email: string, password: string) => {
+    const body = JSON.stringify({ email, password });
+
+    return async (dispatch: AppDispatch) => {
+        try {
+            const response = await fetch('http://localhost:5001/api/admin/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: body,
+            })
+            const result = await response.json();
+
+            if (result.token !== undefined) {
+                localStorage.setItem('token', result.token);
+                dispatch(authUser());
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
+export const getUsers = (page: number, rows: number) => async (dispatch: AppDispatch) => {
+    try {
+        // console.log(`${page} ${rows}`)
+        const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page + 1}&quantity=${rows}`);
+        const result = await response.json();
+
+        dispatch(fetchUsers(result.rows));
+        console.log(result.rows)
+    } catch (error) {
+        console.log(error)
+    }
+};
+
+
+
+export default usersSlice.reducer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 import { SET_USER, LOGOUT, GET_USERS, Actions, setUser, getUsersAction } from '../actions';
 import { AppDispatch } from '../store';
 
@@ -70,3 +156,4 @@ export const getUsers = (page: number, rows: number) => async (dispatch: AppDisp
         console.log(error)
     }
 };
+*/
