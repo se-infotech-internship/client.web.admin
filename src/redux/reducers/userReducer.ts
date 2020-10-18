@@ -57,7 +57,7 @@ export const login = (email: string, password: string) => {
 export const getUsers = (page: number, rows: number) => async (dispatch: AppDispatch) => {
     try {
         // console.log(`${page} ${rows}`)
-        const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page + 1}&quantity=${rows}`);
+        const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}`);
         const result = await response.json()
 
         dispatch(fetchCountUsers(result.count))

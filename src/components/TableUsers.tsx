@@ -64,7 +64,7 @@ export default function TableUsers() {
 
     const dispatch = useDispatch()
     React.useEffect(() => {
-        dispatch(getUsers(page, rowsPerPage))
+        dispatch(getUsers(page + 1, rowsPerPage))
     }, [page, rowsPerPage])
 
 
@@ -75,7 +75,7 @@ export default function TableUsers() {
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRowsPerPage(+event.target.value);
-        // setPage(1);
+        setPage(0);
     };
 
     return (
