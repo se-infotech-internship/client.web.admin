@@ -1,15 +1,15 @@
 import React from 'react'
 
 import TopBar from '../TopBar'
-import LeftPanel from '../LeftPanel'
 import CardUser from './CardUser'
+import SideBar from '../SideBar'
 
 export default function UserPage() {
     return (
         <React.Fragment>
             <TopBar />
             <div style={{ display: 'flex' }}>
-                <LeftPanel />
+                <SideBar />
                 <CardUser />
             </div>
         </React.Fragment>
