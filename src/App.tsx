@@ -16,8 +16,6 @@ import {
 export default function App() {
   const isAuth = useSelector((state: RootState) => state.users.isAuth);
   return (
-    // <UserPage />
-
     <Router>
       <Switch>
         {

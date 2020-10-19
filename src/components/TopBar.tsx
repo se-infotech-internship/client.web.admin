@@ -8,7 +8,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 
 import { useDispatch } from 'react-redux';
-// import { logout } from '../redux/actions';
 import { logout } from '../redux/reducers/userReducer';
 
 

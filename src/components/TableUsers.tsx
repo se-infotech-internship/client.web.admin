@@ -104,7 +104,7 @@ export default function TableUsers() {
                                         const value = row[column.id];
                                         return (
                                             <TableCell key={column.id} align={column.align} onClick={() => dispatch(clickUser(row.id))}>
-                                                <Link to="/user"  >
+                                                <Link to="/user" style={{ textDecoration: 'none', color: 'grey' }} >
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
                                                 </Link>
                                             </TableCell>

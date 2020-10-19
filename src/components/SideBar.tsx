@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import PeopleIcon from '@material-ui/icons/People'
-import MessageIcon from '@material-ui/icons/Message';
+import MessageIcon from '@material-ui/icons/Message'
 
 
 
@@ -26,12 +27,14 @@ export default function SideBar() {
     return (
         <div className={classes.leftList}>
             <div style={{ marginTop: 25 }}>
-                <ListItem button>
-                    <ListItemIcon>
-                        <PeopleIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Користувачі" />
-                </ListItem>
+                <Link to="/home" style={{ textDecoration: 'none', color: 'grey' }} >
+                    <ListItem button>
+                        <ListItemIcon>
+                            <PeopleIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Користувачі" />
+                    </ListItem>
+                </Link>
                 <ListItem button>
                     <ListItemIcon>
                         <MessageIcon />
