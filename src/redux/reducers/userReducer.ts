@@ -1,13 +1,45 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AppDispatch } from '../store'
 
+export type rowsUsers = {
+    TZLicence: null  /* уточнить тип */
+    TZNumber: null  /* уточнить тип */
+    TZVIN: string
+    appPaymentReminder: boolean
+    blocked: boolean
+    camAutoFind: boolean
+    confirmed: boolean
+    createdAt: string
+    distToCam: string
+    distanceToCam: boolean
+    driverLicence: null  /* уточнить тип */
+    email: string
+    emailNotifications: boolean
+    finesAutoCheck: boolean
+    finesPaymentAutoCheck: boolean
+    id: string
+    isAdmin: boolean
+    maxSpeedNotifications: boolean
+    middleName: string
+    name: string
+    password: string
+    phone: string
+    pushNotifications: boolean
+    rememberPassword: boolean
+    secondName: string
+    sound: boolean
+    turnOnApp: boolean
+    updatedAt: string
+    voiceNotifications: boolean
+}
 
 export const usersSlice = createSlice({
     name: 'users',
     initialState: {
         isAuth: false,
         countUsers: 0,
-        rowsUsers: [],
+        rowsUsers: [] as rowsUsers[],
+        cardUser: ''
     },
     reducers: {
         authUser: state => {
@@ -22,10 +54,13 @@ export const usersSlice = createSlice({
         fetchRowsUsers: (state, action) => {
             state.rowsUsers = action.payload
         },
+        clickUser: (state, action) => {
+            state.cardUser = action.payload
+        }
     }
 })
 
-export const { authUser, logout, fetchRowsUsers, fetchCountUsers } = usersSlice.actions
+export const { authUser, logout, fetchRowsUsers, fetchCountUsers, clickUser } = usersSlice.actions
 
 
 

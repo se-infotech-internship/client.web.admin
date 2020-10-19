@@ -16,10 +16,12 @@ import {
 export default function App() {
   const isAuth = useSelector((state: RootState) => state.users.isAuth);
   return (
+    // <UserPage />
+
     <Router>
       <Switch>
         {
-          isAuth ?
+          !isAuth ?
             <>
               <Route path="/home" component={HomePage} />
               <Redirect to="/home" />
@@ -35,6 +37,7 @@ export default function App() {
         }
       </Switch>
     </Router>
+
   );
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 
 import TopBar from '../TopBar'
 import LeftPanel from '../LeftPanel'
+import CardUser from './CardUser'
 
 export default function UserPage() {
     return (
@@ -9,7 +10,7 @@ export default function UserPage() {
             <TopBar />
             <div style={{ display: 'flex' }}>
                 <LeftPanel />
-                <h2>USER PAGE</h2>
+                <CardUser />
             </div>
         </React.Fragment>
     )
