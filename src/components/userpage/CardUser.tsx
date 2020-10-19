@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -89,36 +89,38 @@ export default function CardUser() {
    */
 
     let userInfo = selectUser.map((user: rowsUsers) => (
-        <React.Fragment>
-            <div style={{ width: '25%', border: '1px solid', margin: 10, borderRadius: 5 }}>
-                <ListItem>
-                    <ListItemText primary={user.middleName} secondary={`по батькові`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText primary={user.phone} secondary={`телефон`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText primary={user.email} secondary={`email`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText primary={user.blocked ? "заблокований" : "активований"} secondary={`аккаунт`} />
-                </ListItem>
-            </div >
-            <div style={{ width: '25%', border: '1px solid', margin: 10, borderRadius: 5 }}>
-                <ListItem>
-                    <ListItemText primary={'інформація відсутня'} secondary={`номер тз`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText primary={user.TZVIN} secondary={`TZVIN`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText primary={user.distToCam + ` метрів`} secondary={`дистанція до камери`} />
-                </ListItem>
-                <ListItem>
-                    <ListItemText primary={user.TZVIN} secondary={`TZVIN`} />
-                </ListItem>
+        <Card className={classes.root} variant="outlined">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '30%', margin: 10, borderRadius: 5 }}>
+                    <ListItem>
+                        <ListItemText primary={user.middleName} secondary={`по батькові`} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary={user.phone} secondary={`телефон`} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary={user.email} secondary={`email`} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary={user.blocked ? "заблокований" : "активований"} secondary={`аккаунт`} />
+                    </ListItem>
+                </div >
+                <div style={{ width: '30%', margin: 10, borderRadius: 5 }}>
+                    <ListItem>
+                        <ListItemText primary={'інформація відсутня'} secondary={`номер тз`} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary={user.TZVIN} secondary={`TZVIN`} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary={user.distToCam + ` метрів`} secondary={`дистанція до камери`} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary={user.TZVIN} secondary={`TZVIN`} />
+                    </ListItem>
+                </div>
             </div>
-        </React.Fragment>
+        </Card>
     ))
 
     return (
