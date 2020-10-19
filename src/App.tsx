@@ -19,7 +19,7 @@ export default function App() {
     <Router>
       <Switch>
         {
-          !isAuth ?
+          isAuth ?
             <>
               <Route path="/home" component={HomePage} />
               <Redirect to="/home" />

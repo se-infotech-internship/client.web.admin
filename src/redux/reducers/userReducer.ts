@@ -88,11 +88,28 @@ export const login = (email: string, password: string) => {
     }
 }
 
+// Создать отдельные файлы
+const config = {
+    host: "13",
+    port: 8080
+};
+
+const fetchCustom = (url: string, params: RequestInit = {} as any) => fetch(`https://${config.host}:${config.port}${url}`, {
+    ...params,
+    headers: {
+        ...params.headers,
+        //@ts-ignore
+        token: localStorage.getItem('token')
+    }
+});
+
+
+
 
 export const getUsers = (page: number, rows: number) => async (dispatch: AppDispatch) => {
     try {
         // console.log(`${page} ${rows}`)
-        const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}`);
+        const response = await fetchCustom(`/api/admin/users/?page=${page}&quantity=${rows}`);
         const result = await response.json()
 
         dispatch(fetchCountUsers(result.count))
