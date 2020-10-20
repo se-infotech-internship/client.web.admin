@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button'
 import { useDispatch } from 'react-redux'
 import { logout } from '../redux/reducers/userReducer'
 
+import { Link } from 'react-router-dom'
+
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -99,8 +101,9 @@ export default function TopBar() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Панель адміністратора
+                        <Link style={{ textDecoration: 'none', color: 'white' }} to="/home">Панель адміністратора</Link>
                     </Typography>
+
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon />

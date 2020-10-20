@@ -55,10 +55,9 @@ const useStyles = makeStyles({
 
 export default function TableUsers() {
     const classes = useStyles()
+    let history = useHistory()
     const [page, setPage] = React.useState(0)
     const [rowsPerPage, setRowsPerPage] = React.useState(10)
-
-    let history = useHistory()
 
 
     const rows = useSelector((state: RootState) => state.users.rowsUsers)
@@ -84,8 +83,6 @@ export default function TableUsers() {
             console.log(error)
         }
     }
-
-
 
 
     const handleChangePage = (event: unknown, newPage: number) => {
