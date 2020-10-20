@@ -49,7 +49,7 @@ export default function CardUser() {
     const bull = <span className={classes.bullet}>•</span>
 
     const users = useSelector((state: RootState) => state.users.rowsUsers)
-    const userId = useSelector((state: RootState) => state.users.cardUser)
+    const userId = useSelector((state: RootState) => state.users.cardUserId)
     const selectUser: rowsUsers[] = users.filter(user => user.id === userId)
 
     const nameUser = selectUser.map(user => user.name)

@@ -39,7 +39,7 @@ export const usersSlice = createSlice({
         isAuth: false,
         countUsers: 0,
         rowsUsers: [] as rowsUsers[],
-        cardUser: ''
+        cardUserId: ''
     },
     reducers: {
         authUser: state => {
@@ -55,7 +55,7 @@ export const usersSlice = createSlice({
             state.rowsUsers = action.payload
         },
         clickUser: (state, action) => {
-            state.cardUser = action.payload
+            state.cardUserId = action.payload
         }
     }
 })
