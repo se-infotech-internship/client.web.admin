@@ -12,9 +12,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import TextField from '@material-ui/core/TextField'
 
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { rowsUsers } from '../../redux/reducers/userReducer'
+import { redirectAfterDelete } from '../../redux/reducers/userReducer'
 
 
 const useStyles = makeStyles({
@@ -35,6 +36,7 @@ const useStyles = makeStyles({
 
 export default function CardUser() {
     const classes = useStyles()
+    const dispatch = useDispatch()
     const [state, setState] = React.useState({
         checkedA: true,
         checkedB: true,
@@ -121,6 +123,8 @@ export default function CardUser() {
                 }
             })
             const result = await response.json()
+            dispatch(redirectAfterDelete())
+            // dispatch(redirectAfterDelete())
             // console.log(result)
         } catch (error) {
             console.log(error)
