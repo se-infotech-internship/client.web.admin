@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { AppDispatch } from '../store'
+
 
 export type rowsUsers = {
     TZLicence: null  /* уточнить тип */
@@ -61,48 +61,6 @@ export const usersSlice = createSlice({
 })
 
 export const { authUser, logout, fetchRowsUsers, fetchCountUsers, clickUser } = usersSlice.actions
-
-
-
-export const login = (email: string, password: string) => {
-    const body = JSON.stringify({ email, password })
-
-    return async (dispatch: AppDispatch) => {
-        try {
-            const response = await fetch('http://localhost:5001/api/admin/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: body,
-            })
-            const result = await response.json()
-
-            if (result.token !== undefined) {
-                localStorage.setItem('token', result.token)
-                dispatch(authUser())
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-}
-
-
-export const getUsers = (page: number, rows: number) => async (dispatch: AppDispatch) => {
-    try {
-        // console.log(`${page} ${rows}`)
-        const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}`)
-        const result = await response.json()
-
-        dispatch(fetchCountUsers(result.count))
-        dispatch(fetchRowsUsers(result.rows))
-        // console.log(result)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 
 
 export default usersSlice.reducer

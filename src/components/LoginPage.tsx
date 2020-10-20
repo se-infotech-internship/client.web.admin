@@ -11,7 +11,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
 import { useDispatch } from 'react-redux'
-import { login } from '../redux/reducers/userReducer'
+import { AppDispatch } from '../redux/store'
+import { authUser } from '../redux/reducers/userReducer'
 
 function Copyright() {
   return (
@@ -70,6 +71,30 @@ export default function LoginPage() {
     setEmail('')
     setPassword('')
     // console.log(`${email} ${password}`)
+  }
+
+  const login = (email: string, password: string) => {
+    const body = JSON.stringify({ email, password })
+
+    return async (dispatch: AppDispatch) => {
+      try {
+        const response = await fetch('http://localhost:5001/api/admin/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+          },
+          body: body,
+        })
+        const result = await response.json()
+
+        if (result.token !== undefined) {
+          localStorage.setItem('token', result.token)
+          dispatch(authUser())
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 
 

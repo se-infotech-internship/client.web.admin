@@ -11,8 +11,8 @@ import TableRow from '@material-ui/core/TableRow'
 
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
-import { getUsers, clickUser } from '../redux/reducers/userReducer'
+import { RootState, AppDispatch } from '../redux/store'
+import { fetchRowsUsers, fetchCountUsers, clickUser } from '../redux/reducers/userReducer'
 
 import { Link } from 'react-router-dom'
 
@@ -68,6 +68,21 @@ export default function TableUsers() {
     React.useEffect(() => {
         dispatch(getUsers(page + 1, rowsPerPage))
     }, [page, rowsPerPage])
+
+    const getUsers = (page: number, rows: number) => async (dispatch: AppDispatch) => {
+        try {
+            // console.log(`${page} ${rows}`)
+            const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}`)
+            const result = await response.json()
+
+            dispatch(fetchCountUsers(result.count))
+            dispatch(fetchRowsUsers(result.rows))
+            // console.log(result)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
 
 
