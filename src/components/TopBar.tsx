@@ -1,14 +1,14 @@
-import React from 'react';
-import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
-import Button from '@material-ui/core/Button';
+import React from 'react'
+import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import InputBase from '@material-ui/core/InputBase'
+import SearchIcon from '@material-ui/icons/Search'
+import Button from '@material-ui/core/Button'
 
-import { useDispatch } from 'react-redux';
-import { logout } from '../redux/reducers/userReducer';
+import { useDispatch } from 'react-redux'
+import { logout } from '../redux/reducers/userReducer'
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -71,12 +71,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 export default function TopBar() {
-    const classes = useStyles();
-    const dispatch = useDispatch();
+    const classes = useStyles()
+    const dispatch = useDispatch()
 
     function handleClick() {
-        localStorage.removeItem('token');
-        dispatch(logout());
+        localStorage.removeItem('token')
+        dispatch(logout())
     }
 
 
@@ -84,7 +84,7 @@ export default function TopBar() {
     // const searchUsers = async () => {
     //     try {
     //         // console.log(`${page} ${rows}`)
-    //         const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}&phone=${phone}`);
+    //         const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}&phone=${phone}`)
     //         const result = await response.json()
 
 

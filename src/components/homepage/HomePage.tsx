@@ -9,7 +9,6 @@ export default function HomePage() {
         <React.Fragment>
             <TopBar />
             <div style={{ display: 'flex' }}>
-
                 <SideBar />
                 <TableUsers />
             </div>

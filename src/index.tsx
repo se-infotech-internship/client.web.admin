@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import * as Sentry from "@sentry/react";
-import { Integrations } from "@sentry/tracing";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import * as Sentry from "@sentry/react"
+import { Integrations } from "@sentry/tracing"
+import CssBaseline from '@material-ui/core/CssBaseline'
+import App from './App'
 
-import { store } from './redux/store';
-import { Provider } from 'react-redux';
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
 
-import { ThemeProvider } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles'
 
 
 Sentry.init({
@@ -21,7 +21,7 @@ Sentry.init({
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
   tracesSampleRate: 1.0,
-});
+})
 
 
 
@@ -40,7 +40,7 @@ const theme = createMuiTheme({
       contrastText: '#000',
     },
   },
-});
+})
 
 
 

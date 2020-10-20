@@ -41,7 +41,7 @@ const columns: Column[] = [
         // align: 'right',
         // format: (value: number) => value.toLocaleString('en-US'),
     },
-];
+]
 
 
 const useStyles = makeStyles({
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
     container: {
         maxHeight: '100vh', // default height 440px
     },
-});
+})
 
 export default function TableUsers() {
     const classes = useStyles()
@@ -72,13 +72,13 @@ export default function TableUsers() {
 
 
     const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
-    };
+        setPage(newPage)
+    }
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
-    };
+        setRowsPerPage(+event.target.value)
+        setPage(0)
+    }
     return (
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
@@ -101,17 +101,17 @@ export default function TableUsers() {
                             return (
                                 <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={() => console.log(row.email)}>
                                     {columns.map((column) => {
-                                        const value = row[column.id];
+                                        const value = row[column.id]
                                         return (
                                             <TableCell key={column.id} align={column.align} onClick={() => dispatch(clickUser(row.id))}>
                                                 <Link to="/user" style={{ textDecoration: 'none', color: 'grey' }} >
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
                                                 </Link>
                                             </TableCell>
-                                        );
+                                        )
                                     })}
                                 </TableRow>
-                            );
+                            )
                         })}
                     </TableBody>
                 </Table>
@@ -126,5 +126,5 @@ export default function TableUsers() {
                 onChangeRowsPerPage={handleChangeRowsPerPage}
             />
         </Paper>
-    );
+    )
 }

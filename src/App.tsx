@@ -1,25 +1,25 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from './redux/store';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from './redux/store'
 
-import LoginPage from './components/LoginPage';
-import HomePage from './components/homepage/HomePage';
-import UserPage from './components/userpage/UserPage';
+import LoginPage from './components/LoginPage'
+import HomePage from './components/homepage/HomePage'
+import UserPage from './components/userpage/UserPage'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
-} from "react-router-dom";
+} from "react-router-dom"
 
 export default function App() {
-  const isAuth = useSelector((state: RootState) => state.users.isAuth);
+  const isAuth = useSelector((state: RootState) => state.users.isAuth)
   return (
     <Router>
       <Switch>
         {
-          !isAuth ?
+          isAuth ?
             <>
               <Route path="/home" component={HomePage} />
               <Redirect to="/home" />
@@ -35,8 +35,7 @@ export default function App() {
         }
       </Switch>
     </Router>
-
-  );
+  )
 }
 
 

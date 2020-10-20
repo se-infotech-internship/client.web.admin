@@ -65,7 +65,7 @@ export const { authUser, logout, fetchRowsUsers, fetchCountUsers, clickUser } = 
 
 
 export const login = (email: string, password: string) => {
-    const body = JSON.stringify({ email, password });
+    const body = JSON.stringify({ email, password })
 
     return async (dispatch: AppDispatch) => {
         try {
@@ -76,14 +76,14 @@ export const login = (email: string, password: string) => {
                 },
                 body: body,
             })
-            const result = await response.json();
+            const result = await response.json()
 
             if (result.token !== undefined) {
-                localStorage.setItem('token', result.token);
-                dispatch(authUser());
+                localStorage.setItem('token', result.token)
+                dispatch(authUser())
             }
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 }
@@ -92,7 +92,7 @@ export const login = (email: string, password: string) => {
 export const getUsers = (page: number, rows: number) => async (dispatch: AppDispatch) => {
     try {
         // console.log(`${page} ${rows}`)
-        const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}`);
+        const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}`)
         const result = await response.json()
 
         dispatch(fetchCountUsers(result.count))
@@ -111,58 +111,8 @@ export default usersSlice.reducer
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*  правки
 
-export const { authUser, logout, fetchRowsUsers, fetchCountUsers, clickUser } = usersSlice.actions
-
-
-
-export const login = (email: string, password: string) => {
-    const body = JSON.stringify({ email, password });
-
-    return async (dispatch: AppDispatch) => {
-        try {
-            const response = await fetch('http://localhost:5001/api/admin/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: body,
-            })
-            const result = await response.json();
-
-            if (result.token !== undefined) {
-                localStorage.setItem('token', result.token);
-                dispatch(authUser());
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
 
 // Создать отдельные файлы
 const config = {

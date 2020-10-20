@@ -31,10 +31,10 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
-});
+})
 
 export default function CardUser() {
-    const classes = useStyles();
+    const classes = useStyles()
     const [state, setState] = React.useState({
         checkedA: true,
         checkedB: true,
@@ -42,7 +42,7 @@ export default function CardUser() {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [event.target.name]: event.target.checked })
-        blockUser(userId);
+        blockUser(userId)
     }
 
 
@@ -101,7 +101,7 @@ export default function CardUser() {
                 headers: {
                     token: localStorage.getItem('token')
                 }
-            });
+            })
             const result = await response.json()
             // console.log(result)
         } catch (error) {
@@ -189,7 +189,7 @@ export default function CardUser() {
                 </List>
             </CardContent>
         </Card>
-    );
+    )
 }
 
 
