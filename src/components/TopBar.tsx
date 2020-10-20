@@ -79,6 +79,21 @@ export default function TopBar() {
         dispatch(logout());
     }
 
+
+
+    // const searchUsers = async () => {
+    //     try {
+    //         // console.log(`${page} ${rows}`)
+    //         const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}&phone=${phone}`);
+    //         const result = await response.json()
+
+
+    //         // console.log(result)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+
     return (
         <div className={classes.grow}>
             <AppBar position="static">

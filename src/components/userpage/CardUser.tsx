@@ -42,7 +42,9 @@ export default function CardUser() {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setState({ ...state, [event.target.name]: event.target.checked })
+        blockUser(userId);
     }
+
 
     const bull = <span className={classes.bullet}>•</span>
 
@@ -53,40 +55,6 @@ export default function CardUser() {
     const nameUser = selectUser.map(user => user.name)
     const secondNameUser = selectUser.map(user => user.secondName)
     // console.log(selectUser)
-
-    /*
-    const {
-        TZLicence,
-        TZNumber,
-        TZVIN,
-        appPaymentReminder,
-        blocked,
-        camAutoFind,
-        confirmed,
-        createdAt,
-        distToCam,
-        distanceToCam,
-        driverLicence,
-        email,
-        emailNotifications,
-        finesAutoCheck,
-        finesPaymentAutoCheck,
-        id,
-        isAdmin,
-        maxSpeedNotifications,
-        middleName,
-        name,
-        password,
-        phone,
-        pushNotifications,
-        rememberPassword,
-        secondName,
-        sound,
-        turnOnApp,
-        updatedAt,
-        voiceNotifications,
-    } = selectUser[0]
-   */
 
     let userInfo = selectUser.map((user: rowsUsers) => (
         <Card className={classes.root} variant="outlined">
@@ -123,6 +91,43 @@ export default function CardUser() {
         </Card>
     ))
 
+
+
+    const blockUser = async (userId: string) => {
+        try {
+            // console.log(`${page} ${rows}`)
+            const response = await fetch(`http://localhost:5001/api/admin/block/${userId}`, {
+                //@ts-ignore   
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            });
+            const result = await response.json()
+            // console.log(result)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    const deleteUser = async (userId: string) => {
+        try {
+            // console.log(`${page} ${rows}`)
+            const response = await fetch(`http://localhost:5001/api/admin/delete/${userId}`, {
+                method: 'DELETE',
+                //@ts-ignore   
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            const result = await response.json()
+            // console.log(result)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
@@ -149,6 +154,7 @@ export default function CardUser() {
                                 variant="contained"
                                 color="secondary"
                                 startIcon={<DeleteIcon />}
+                                onClick={() => deleteUser(userId)}
                             >
                                 Видалити
                             </Button>
@@ -171,7 +177,10 @@ export default function CardUser() {
                                 style={{ width: '60%' }}
                             />
                             <div style={{ margin: 10, marginLeft: 650 }}>
-                                <Button variant="contained" color="primary">
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                >
                                     Надіслати
                                 </Button>
                             </div>
@@ -182,3 +191,38 @@ export default function CardUser() {
         </Card>
     );
 }
+
+
+/*
+   const {
+       TZLicence,
+       TZNumber,
+       TZVIN,
+       appPaymentReminder,
+       blocked,
+       camAutoFind,
+       confirmed,
+       createdAt,
+       distToCam,
+       distanceToCam,
+       driverLicence,
+       email,
+       emailNotifications,
+       finesAutoCheck,
+       finesPaymentAutoCheck,
+       id,
+       isAdmin,
+       maxSpeedNotifications,
+       middleName,
+       name,
+       password,
+       phone,
+       pushNotifications,
+       rememberPassword,
+       secondName,
+       sound,
+       turnOnApp,
+       updatedAt,
+       voiceNotifications,
+   } = selectUser[0]
+  */
