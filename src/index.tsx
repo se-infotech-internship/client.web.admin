@@ -10,6 +10,7 @@ import { Provider } from 'react-redux'
 
 import { ThemeProvider } from '@material-ui/core/styles'
 import { createMuiTheme } from '@material-ui/core/styles'
+import { ukUA } from '@material-ui/core/locale'
 
 
 Sentry.init({
@@ -40,7 +41,7 @@ const theme = createMuiTheme({
       contrastText: '#000',
     },
   },
-})
+}, ukUA)
 
 
 

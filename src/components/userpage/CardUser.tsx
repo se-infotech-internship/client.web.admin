@@ -15,7 +15,8 @@ import TextField from '@material-ui/core/TextField'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { rowsUsers } from '../../redux/reducers/userReducer'
-import { redirectAfterDelete } from '../../redux/reducers/userReducer'
+
+import { useHistory } from 'react-router-dom'
 
 
 const useStyles = makeStyles({
@@ -36,7 +37,8 @@ const useStyles = makeStyles({
 
 export default function CardUser() {
     const classes = useStyles()
-    const dispatch = useDispatch()
+    let history = useHistory()
+
     const [state, setState] = React.useState({
         checkedA: true,
         checkedB: true,
@@ -122,9 +124,8 @@ export default function CardUser() {
                     token: localStorage.getItem('token')
                 }
             })
-            const result = await response.json()
-            dispatch(redirectAfterDelete())
-            // dispatch(redirectAfterDelete())
+            history.push("/home")
+            // const result = await response.json()
             // console.log(result)
         } catch (error) {
             console.log(error)

@@ -58,13 +58,10 @@ export const usersSlice = createSlice({
         clickUser: (state, action) => {
             state.cardUserId = action.payload
         },
-        redirectAfterDelete: state => {
-            state.afterDelete = !state.afterDelete
-        }
     }
 })
 
-export const { authUser, logout, fetchRowsUsers, fetchCountUsers, clickUser, redirectAfterDelete } = usersSlice.actions
+export const { authUser, logout, fetchRowsUsers, fetchCountUsers, clickUser } = usersSlice.actions
 
 
 export default usersSlice.reducer

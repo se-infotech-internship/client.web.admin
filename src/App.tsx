@@ -11,10 +11,12 @@ import {
   Switch,
   Route,
   Redirect
-} from "react-router-dom"
+} from 'react-router-dom'
+
 
 export default function App() {
   const isAuth = useSelector((state: RootState) => state.users.isAuth)
+
   return (
     <Router>
       <Switch>
