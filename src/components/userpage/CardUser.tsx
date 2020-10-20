@@ -12,7 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 import TextField from '@material-ui/core/TextField'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 import { rowsUsers } from '../../redux/reducers/userReducer'
 
@@ -106,7 +106,7 @@ export default function CardUser() {
                     token: localStorage.getItem('token')
                 }
             })
-            const result = await response.json()
+            // const result = await response.json()
             // console.log(result)
         } catch (error) {
             console.log(error)

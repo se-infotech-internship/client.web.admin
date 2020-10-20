@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../redux/store'
 import { fetchRowsUsers, fetchCountUsers, clickUser } from '../redux/reducers/userReducer'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 interface Column {
     id: 'name' | 'secondName' | 'email' | 'phone';
@@ -58,6 +58,8 @@ export default function TableUsers() {
     const [page, setPage] = React.useState(0)
     const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
+    let history = useHistory()
+
 
     const rows = useSelector((state: RootState) => state.users.rowsUsers)
     const countState = useSelector((state: RootState) => state.users.countUsers)
@@ -94,6 +96,16 @@ export default function TableUsers() {
         setRowsPerPage(+event.target.value)
         setPage(0)
     }
+
+
+    function handleClickUser(id: string) {
+        dispatch(clickUser(id))
+    }
+
+    function toUserPage() {
+        history.push("/user")
+    }
+
     return (
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
@@ -114,12 +126,12 @@ export default function TableUsers() {
                     <TableBody>
                         {rows.map((row: any) => {
                             return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={() => console.log(row.email)}>
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={toUserPage}>
                                     {columns.map((column) => {
                                         const value = row[column.id]
                                         return (
-                                            <TableCell key={column.id} align={column.align} onClick={() => dispatch(clickUser(row.id))}>
-                                                <Link to="/user" style={{ textDecoration: 'none', color: 'grey' }} >
+                                            <TableCell key={column.id} align={column.align} onClick={() => handleClickUser(row.id)}>
+                                                <Link to="/user" style={{ textDecoration: 'none', color: 'grey', cursor: 'default ' }} >
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
                                                 </Link>
                                             </TableCell>
