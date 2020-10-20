@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -75,12 +75,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function TopBar() {
     const classes = useStyles()
     const dispatch = useDispatch()
+    const [search, setSearch] = useState('')
 
-    function handleClick() {
-        localStorage.removeItem('token')
-        dispatch(logout())
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+        setSearch(e.target.value)
     }
 
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        console.log(search)
+    }
 
 
     // const searchUsers = async () => {
@@ -96,6 +100,13 @@ export default function TopBar() {
     //     }
     // }
 
+
+
+    function handleClick() {
+        localStorage.removeItem('token')
+        dispatch(logout())
+    }
+
     return (
         <div className={classes.grow}>
             <AppBar position="static">
@@ -108,14 +119,18 @@ export default function TopBar() {
                         <div className={classes.searchIcon}>
                             <SearchIcon />
                         </div>
-                        <InputBase
-                            placeholder="Пошук…"
-                            classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput,
-                            }}
-                            inputProps={{ 'aria-label': 'search' }}
-                        />
+                        <form onSubmit={handleSubmit}>
+                            <InputBase
+                                placeholder="Пошук…"
+                                classes={{
+                                    root: classes.inputRoot,
+                                    input: classes.inputInput,
+                                }}
+                                inputProps={{ 'aria-label': 'search' }}
+                                value={search}
+                                onChange={handleChange}
+                            />
+                        </form>
                     </div>
                     <div style={{ marginLeft: "62.5%" }}>
                         <Button
