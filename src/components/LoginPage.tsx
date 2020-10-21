@@ -128,7 +128,7 @@ export default function LoginPage() {
             required
             fullWidth
             id='email'
-            label='Email Address'
+            label='Логін / Email'
             name='email'
             // autoComplete='email'
             autoFocus
@@ -136,7 +136,7 @@ export default function LoginPage() {
             value={email}
             onChange={handleEmail}
             error={isError}
-            helperText={isError ? 'Логін або пароль неправильні' : ''}
+            helperText={isError ? 'Логін або пароль невірні' : ''}
           />
           <TextField
             variant='outlined'
@@ -144,14 +144,14 @@ export default function LoginPage() {
             required
             fullWidth
             name='password'
-            label='Password'
+            label='Пароль'
             type='password'
             id='password'
             // autoComplete='current-password'
             value={password}
             onChange={handlePassword}
             error={isError}
-            helperText={isError ? 'Логін або пароль неправильні' : ''}
+            helperText={isError ? 'Логін або пароль невірні' : ''}
           />
           <Button
             type='submit'
