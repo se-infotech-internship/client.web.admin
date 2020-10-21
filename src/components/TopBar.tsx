@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -10,7 +11,6 @@ import Button from '@material-ui/core/Button'
 import { useDispatch } from 'react-redux'
 import { logout } from '../redux/reducers/userReducer'
 
-import { Link } from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -83,7 +83,7 @@ export default function TopBar() {
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        console.log(search)
+        // console.log(search)
     }
 
 

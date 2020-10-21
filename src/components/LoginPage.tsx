@@ -53,6 +53,7 @@ export default function LoginPage() {
   const classes = useStyles()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isError, setIsError] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -67,10 +68,12 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(login(email, password))
-    setEmail('')
-    setPassword('')
-    // console.log(`${email} ${password}`)
+    if (email !== '' && password !== '') {
+      dispatch(login(email, password))
+      setEmail('')
+      setPassword('')
+      // console.log(`${email} ${password}`)
+    }
   }
 
   const login = (email: string, password: string) => {
@@ -90,11 +93,17 @@ export default function LoginPage() {
         if (result.token !== undefined) {
           localStorage.setItem('token', result.token)
           dispatch(authUser())
+        } else {
+          setIsError(true)
         }
       } catch (error) {
         console.log(error)
       }
     }
+  }
+
+  const handleFocus = () => {
+    setIsError(false)
   }
 
 
@@ -110,7 +119,7 @@ export default function LoginPage() {
         </Typography>
         <form
           className={classes.form}
-          noValidate
+          // noValidate
           onSubmit={handleSubmit}
         >
           <TextField
@@ -123,8 +132,11 @@ export default function LoginPage() {
             name='email'
             // autoComplete='email'
             autoFocus
+            onFocus={handleFocus}
             value={email}
             onChange={handleEmail}
+            error={isError}
+            helperText={isError ? 'Логін або пароль неправильні' : ''}
           />
           <TextField
             variant='outlined'
@@ -138,6 +150,8 @@ export default function LoginPage() {
             // autoComplete='current-password'
             value={password}
             onChange={handlePassword}
+            error={isError}
+            helperText={isError ? 'Логін або пароль неправильні' : ''}
           />
           <Button
             type='submit'
