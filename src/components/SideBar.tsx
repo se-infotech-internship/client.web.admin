@@ -7,9 +7,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import PeopleIcon from '@material-ui/icons/People'
 import MessageIcon from '@material-ui/icons/Message'
 
-import { useDispatch } from 'react-redux'
-import { fetchCountUsers, fetchRowsUsers } from '../redux/reducers/userReducer'
-
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -37,20 +34,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SideBar() {
     const classes = useStyles()
 
-    const dispatch = useDispatch()
-    function handleClick() {
-        // console.log('click')
-    }
-
-
     return (
         <div className={classes.leftList}>
             <div className={classes.wrapper_links}>
-                <Link
-                    to="/home"
-                    className={classes.link_component}
-                    onClick={handleClick}
-                >
+                <Link to="/home" className={classes.link_component}>
                     <ListItem button>
                         <ListItemIcon>
                             <PeopleIcon />

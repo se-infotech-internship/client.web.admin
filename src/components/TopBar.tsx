@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import Button from '@material-ui/core/Button'
 
 import { useDispatch } from 'react-redux'
-import { logout, fetchRowsUsers, clickUser } from '../redux/reducers/userReducer'
+import { logout, fetchSearchUsers, clickUser } from '../redux/reducers/userReducer'
 
 
 
@@ -89,6 +89,7 @@ export default function TopBar() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         searchUsers(search)
+        setSearch('')
         // console.log(search)
     }
 
@@ -106,8 +107,9 @@ export default function TopBar() {
 
             // console.log(result.rows[0]) // искомый юзер
             const searchResult = [result.rows[0]]
-            dispatch(fetchRowsUsers(searchResult))
+            dispatch(fetchSearchUsers(searchResult))
             dispatch(clickUser(result.rows[0].id))
+            history.push('/search')
         } catch (error) {
             console.log(error)
         }

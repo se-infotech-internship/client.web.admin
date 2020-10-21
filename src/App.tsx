@@ -6,6 +6,8 @@ import LoginPage from './components/LoginPage'
 import HomePage from './components/homepage/HomePage'
 import UserPage from './components/userpage/UserPage'
 
+import SearchPage from './components/search-page/SearchPage'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,9 +27,8 @@ export default function App() {
             <>
               <Route path="/home" component={HomePage} />
               <Redirect to="/home" />
-              <Route path="/user">
-                <UserPage />
-              </Route>
+              <Route path="/user" component={UserPage} />
+              <Route path="/search" component={SearchPage} />
             </>
             :
             <>
@@ -35,6 +36,7 @@ export default function App() {
               <Redirect to="/login" />
             </>
         }
+
       </Switch>
     </Router>
   )
