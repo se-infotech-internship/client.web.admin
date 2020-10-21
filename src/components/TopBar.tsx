@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import Button from '@material-ui/core/Button'
 
 import { useDispatch } from 'react-redux'
-import { logout } from '../redux/reducers/userReducer'
+import { logout, fetchSearchUser } from '../redux/reducers/userReducer'
 
 
 
@@ -88,7 +88,7 @@ export default function TopBar() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         searchUsers(search)
-        console.log(search)
+        // console.log(search)
     }
 
 
@@ -102,9 +102,9 @@ export default function TopBar() {
                 }
             })
             const result = await response.json()
-            console.log(result.rows[0]) // искомый юзер
 
-            // console.log(result)
+            // console.log(result.rows[0]) // искомый юзер
+            dispatch(fetchSearchUser(result.rows[0]))
         } catch (error) {
             console.log(error)
         }
@@ -132,7 +132,7 @@ export default function TopBar() {
                         </div>
                         <form onSubmit={handleSubmit}>
                             <InputBase
-                                placeholder="Пошук…"
+                                placeholder="Пошук за телефоном…"
                                 classes={{
                                     root: classes.inputRoot,
                                     input: classes.inputInput,
