@@ -67,6 +67,10 @@ const useStyles = makeStyles((theme: Theme) =>
                 display: 'flex',
             },
         },
+        component_link: {
+            textDecoration: 'none',
+            color: 'white'
+        },
     }),
 )
 
@@ -112,7 +116,7 @@ export default function TopBar() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        <Link style={{ textDecoration: 'none', color: 'white' }} to="/home">Панель адміністратора</Link>
+                        <Link to="/home" className={classes.component_link}>Панель адміністратора</Link>
                     </Typography>
 
                     <div className={classes.search}>
@@ -137,7 +141,6 @@ export default function TopBar() {
                             variant="outlined"
                             color="inherit"
                             onClick={handleClick}
-                        // onClick={() => dispatch(logout())}
                         >
                             Вийти
                          </Button>

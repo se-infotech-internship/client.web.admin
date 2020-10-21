@@ -25,15 +25,42 @@ const useStyles = makeStyles({
         // height: '50vh',
         margin: '10px auto'
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+    listItems_wrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    pos: {
-        marginBottom: 12,
+    listItem: {
+        width: '30%',
+        margin: 10,
+        borderRadius: 5
     },
+    head_wrapper: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        // border: '1px solid green'
+    },
+    buttons_div: {
+        display: 'flex',
+        // border: '1px solid red'
+    },
+    blockDelete_buttons: {
+        margin: 10,
+        // border: '1px solid orange'
+    },
+    bottom_block: {
+        textAlign: 'center',
+        marginTop: 20,
+        // border: '1px solid'
+    },
+    submit_button: {
+        margin: 10,
+        marginLeft: 650
+    }
 })
+
 
 export default function CardUser() {
     const classes = useStyles()
@@ -50,8 +77,6 @@ export default function CardUser() {
     }
 
 
-    const bull = <span className={classes.bullet}>•</span>
-
     const users = useSelector((state: RootState) => state.users.rowsUsers)
     const userId = useSelector((state: RootState) => state.users.cardUserId)
     const selectUser: rowsUsers[] = users.filter(user => user.id === userId)
@@ -62,8 +87,8 @@ export default function CardUser() {
 
     let userInfo = selectUser.map((user: rowsUsers) => (
         <Card className={classes.root} variant="outlined">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ width: '30%', margin: 10, borderRadius: 5 }}>
+            <div className={classes.listItems_wrapper}>
+                <div className={classes.listItem}>
                     <ListItem>
                         <ListItemText primary={user.middleName} secondary={`по батькові`} />
                     </ListItem>
@@ -77,7 +102,7 @@ export default function CardUser() {
                         <ListItemText primary={user.blocked ? "заблокований" : "активований"} secondary={`аккаунт`} />
                     </ListItem>
                 </div >
-                <div style={{ width: '30%', margin: 10, borderRadius: 5 }}>
+                <div className={classes.listItem}>
                     <ListItem>
                         <ListItemText primary={'інформація відсутня'} secondary={`номер тз`} />
                     </ListItem>
@@ -136,12 +161,12 @@ export default function CardUser() {
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', /*border: '1px solid green' */ }}>
+                <div className={classes.head_wrapper}>
                     <div>
                         <Typography variant="h2" gutterBottom={true}>{nameUser} {secondNameUser}</Typography>
                     </div>
-                    <div style={{ display: 'flex',  /* border: '1px solid red' */ }} >
-                        <div style={{ margin: 10 }}>
+                    <div className={classes.buttons_div} >
+                        <div className={classes.blockDelete_buttons}>
                             <FormControlLabel
                                 control={
                                     <Switch
@@ -154,7 +179,7 @@ export default function CardUser() {
                                 label={state.checkedB ? "Активований" : "Заблокований"}
                             />
                         </div>
-                        <div style={{ margin: 10 }}>
+                        <div className={classes.blockDelete_buttons}>
                             <Button
                                 variant="contained"
                                 color="secondary"
@@ -167,10 +192,10 @@ export default function CardUser() {
                     </div>
                 </div>
                 <List>
-                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: 25 }}>
+                    <div>
                         {userInfo}
                     </div>
-                    <div style={{ textAlign: 'center', marginTop: 20 }}>
+                    <div className={classes.bottom_block}>
                         <form>
                             <TextField
                                 id="outlined-multiline-static"
@@ -181,7 +206,7 @@ export default function CardUser() {
                                 variant="outlined"
                                 style={{ width: '60%' }}
                             />
-                            <div style={{ margin: 10, marginLeft: 650 }}>
+                            <div className={classes.submit_button}>
                                 <Button
                                     variant="contained"
                                     color="primary"

@@ -17,8 +17,15 @@ const useStyles = makeStyles((theme: Theme) =>
             // maxWidth: 360,
             backgroundColor: theme.palette.background.paper,
             borderRight: '3px solid grey',
-
         },
+        wrapper_links: {
+            marginTop: 25,
+            // border: "1px solid red"
+        },
+        link_component: {
+            textDecoration: 'none',
+            color: 'grey'
+        }
     })
 )
 
@@ -26,8 +33,8 @@ export default function SideBar() {
     const classes = useStyles()
     return (
         <div className={classes.leftList}>
-            <div style={{ marginTop: 25 }}>
-                <Link to="/home" style={{ textDecoration: 'none', color: 'grey' }} >
+            <div className={classes.wrapper_links}>
+                <Link to="/home" className={classes.link_component}>
                     <ListItem button>
                         <ListItemIcon>
                             <PeopleIcon />
