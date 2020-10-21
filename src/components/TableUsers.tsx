@@ -123,12 +123,12 @@ export default function TableUsers() {
                     <TableBody>
                         {rows.map((row: any) => {
                             return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={toUserPage}>
+                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={toUserPage} style={{ cursor: 'pointer' }}>
                                     {columns.map((column) => {
                                         const value = row[column.id]
                                         return (
                                             <TableCell key={column.id} align={column.align} onClick={() => handleClickUser(row.id)}>
-                                                <Link to="/user" style={{ textDecoration: 'none', color: 'grey', cursor: 'default ' }} >
+                                                <Link to="/user" style={{ textDecoration: 'none', color: 'grey' }} >
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
                                                 </Link>
                                             </TableCell>
