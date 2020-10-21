@@ -57,14 +57,11 @@ export const usersSlice = createSlice({
         },
         clickUser: (state, action) => {
             state.cardUserId = action.payload
-        },
-        fetchSearchUser: (state, action) => {
-            state.searchUser = action.payload
         }
     }
 })
 
-export const { authUser, logout, fetchRowsUsers, fetchCountUsers, clickUser, fetchSearchUser } = usersSlice.actions
+export const { authUser, logout, fetchRowsUsers, fetchCountUsers, clickUser } = usersSlice.actions
 
 
 export default usersSlice.reducer

@@ -62,12 +62,7 @@ export default function TableUsers() {
 
     const rows = useSelector((state: RootState) => state.users.rowsUsers)
     const countState = useSelector((state: RootState) => state.users.countUsers)
-    const searchUserObject = useSelector((state: RootState) => state.users.searchUser)
-    // console.log(countState)
-    // console.log(rows)
-    let searchUser = []
-    searchUser.push(searchUserObject)
-    console.log(searchUser)
+
 
     const dispatch = useDispatch()
     React.useEffect(() => {

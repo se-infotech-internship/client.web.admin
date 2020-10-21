@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -9,7 +9,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import Button from '@material-ui/core/Button'
 
 import { useDispatch } from 'react-redux'
-import { logout, fetchSearchUser } from '../redux/reducers/userReducer'
+import { logout, fetchRowsUsers, clickUser } from '../redux/reducers/userReducer'
 
 
 
@@ -78,6 +78,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function TopBar() {
     const classes = useStyles()
+    const history = useHistory()
     const dispatch = useDispatch()
     const [search, setSearch] = useState('')
 
@@ -104,7 +105,9 @@ export default function TopBar() {
             const result = await response.json()
 
             // console.log(result.rows[0]) // искомый юзер
-            dispatch(fetchSearchUser(result.rows[0]))
+            const searchResult = [result.rows[0]]
+            dispatch(fetchRowsUsers(searchResult))
+            dispatch(clickUser(result.rows[0].id))
         } catch (error) {
             console.log(error)
         }
