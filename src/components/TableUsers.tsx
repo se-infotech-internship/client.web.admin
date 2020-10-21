@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
@@ -56,8 +56,8 @@ const useStyles = makeStyles({
 export default function TableUsers() {
     const classes = useStyles()
     let history = useHistory()
-    const [page, setPage] = React.useState(0)
-    const [rowsPerPage, setRowsPerPage] = React.useState(10)
+    const [page, setPage] = useState(0)
+    const [rowsPerPage, setRowsPerPage] = useState(10)
 
 
     const rows = useSelector((state: RootState) => state.users.rowsUsers)

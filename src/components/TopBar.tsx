@@ -87,22 +87,29 @@ export default function TopBar() {
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        // console.log(search)
+        searchUsers(search)
+        console.log(search)
     }
 
 
-    // const searchUsers = async () => {
-    //     try {
-    //         // console.log(`${page} ${rows}`)
-    //         const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}&phone=${phone}`)
-    //         const result = await response.json()
+    const searchUsers = async (search: string) => {
+        try {
+            // console.log(`${page} ${rows}`)
+            const response = await fetch(`http://localhost:5001/api/admin/users/?page=1&quantity=1&phone=${search}`, {
+                //@ts-ignore
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+            const result = await response.json()
+            console.log(result.rows[0]) // искомый юзер
 
+            // console.log(result)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-    //         // console.log(result)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
 
 
 
