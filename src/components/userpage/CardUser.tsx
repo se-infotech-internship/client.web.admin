@@ -170,9 +170,30 @@ export default function CardUser() {
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if (message !== '') {
-            // personalMessage(message)
-            console.log(message)
+            personalMessage(message)
+            // console.log(message)
             setMessage('')
+        }
+    }
+
+    const personalMessage = async (message: string) => {
+        const body = JSON.stringify({ body: message })
+        try {
+            // console.log(`${page} ${rows}`)
+            const response = await fetch(`http://localhost:5001/api/message/add/f7a419aa-bab0-4167-905d-00f6e393a1f8`, {
+                method: 'POST',
+                //@ts-ignore   
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    token: localStorage.getItem('token')
+                },
+                body: body
+            })
+
+            const result = await response.json()
+            // console.log(result)
+        } catch (error) {
+            console.log(error)
         }
     }
 
@@ -224,6 +245,7 @@ export default function CardUser() {
                                 size="medium"
                                 variant="outlined"
                                 className={classes.textField}
+                                value={message}
                                 onChange={handleChangeMessage}
                             />
                             <div className={classes.submit_button}>
