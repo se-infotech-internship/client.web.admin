@@ -58,6 +58,9 @@ const useStyles = makeStyles({
     submit_button: {
         margin: 10,
         // marginLeft: 650
+    },
+    textField: {
+        width: '60%'
     }
 })
 
@@ -160,6 +163,20 @@ export default function CardUser() {
     }
 
 
+    function handleChangeMessage(e: React.ChangeEvent<HTMLInputElement>) {
+        setMessage(e.target.value)
+    }
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        if (message !== '') {
+            // personalMessage(message)
+            console.log(message)
+            setMessage('')
+        }
+    }
+
+
     return (
         <Card className={classes.root} variant="outlined">
             <CardContent>
@@ -198,7 +215,7 @@ export default function CardUser() {
                         {userInfo}
                     </div>
                     <div className={classes.bottom_block}>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <TextField
                                 id="outlined-multiline-static"
                                 label="Написати повідомлення"
@@ -206,12 +223,14 @@ export default function CardUser() {
                                 rows={10}
                                 size="medium"
                                 variant="outlined"
-                                style={{ width: '60%' }}
+                                className={classes.textField}
+                                onChange={handleChangeMessage}
                             />
                             <div className={classes.submit_button}>
                                 <Button
                                     variant="contained"
                                     color="primary"
+                                    type="submit"
                                 >
                                     Надіслати
                                 </Button>

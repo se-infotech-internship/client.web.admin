@@ -27,9 +27,10 @@ export default function App() {
   const isAuth = useSelector((state: RootState) => state.users.isAuth)
 
 
+  // Чтобы при перезугрузке не терят сессию
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
-      dispatch(authUser()) // Чтобы при перезугрузке не терят сессию
+      dispatch(authUser())
     }
   })
 

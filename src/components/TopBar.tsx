@@ -88,9 +88,11 @@ export default function TopBar() {
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        searchUsers(search)
-        setSearch('')
-        // console.log(search)
+        if (search !== '') {
+            searchUsers(search)
+            // console.log(search)
+            setSearch('')
+        }
     }
 
 
