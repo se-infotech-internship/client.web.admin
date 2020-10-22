@@ -74,10 +74,12 @@ const useStyles = makeStyles((theme: Theme) =>
 
 
 export default function TableUsers() {
-    const classes = useStyles()
-    let history = useHistory()
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
+    // const [selectUser, setSelectUser] = useState('')
+
+    const classes = useStyles()
+    let history = useHistory()
 
 
     const rows = useSelector((state: RootState) => state.users.rowsUsers)
@@ -162,22 +164,25 @@ export default function TableUsers() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row: any) => {
-                            return (
-                                <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={toUserPage} style={{ cursor: 'pointer' }}>
-                                    {columns.map((column) => {
-                                        const value = row[column.id]
-                                        return (
-                                            <TableCell key={column.id} align={column.align} onClick={() => handleClickUser(row.id)}>
-                                                <Link to="/user" style={{ textDecoration: 'none', color: 'grey' }} >
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                </Link>
-                                            </TableCell>
-                                        )
-                                    })}
-                                </TableRow>
-                            )
-                        })}
+                        {
+                            rows
+                                // .filter(user => user.blocked)
+                                .map((row: any) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={toUserPage} style={{ cursor: 'pointer' }}>
+                                            {columns.map((column) => {
+                                                const value = row[column.id]
+                                                return (
+                                                    <TableCell key={column.id} align={column.align} onClick={() => handleClickUser(row.id)}>
+                                                        <Link to="/user" style={{ textDecoration: 'none', color: 'grey' }} >
+                                                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                        </Link>
+                                                    </TableCell>
+                                                )
+                                            })}
+                                        </TableRow>
+                                    )
+                                })}
                     </TableBody>
                 </Table>
             </TableContainer>
