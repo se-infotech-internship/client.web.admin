@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import React, { useState, useEffect } from 'react'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -9,6 +9,13 @@ import TableHead from '@material-ui/core/TableHead'
 import TablePagination from '@material-ui/core/TablePagination'
 import TableRow from '@material-ui/core/TableRow'
 
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import NativeSelect from '@material-ui/core/NativeSelect'
+import FormHelperText from '@material-ui/core/FormHelperText'
+
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../redux/store'
@@ -17,41 +24,56 @@ import { fetchRowsUsers, fetchCountUsers, clickUser } from '../redux/reducers/us
 import { Link, useHistory } from 'react-router-dom'
 
 interface Column {
-    id: 'name' | 'secondName' | 'email' | 'phone';
+    id: 'name' | 'secondName' | 'email' | 'phone' | 'select';
     label: string;
     minWidth?: number;
-    align?: 'right';
+    align?: 'center' | 'right';
     format?: (value: number) => string;
 }
 
 const columns: Column[] = [
-    { id: 'name', label: `Ім'я`, minWidth: 170 },
-    { id: 'secondName', label: 'Призвище', minWidth: 170 },
+    { id: 'name', label: `Ім'я`, minWidth: 170, align: 'right', },
+    { id: 'secondName', label: 'Призвище', minWidth: 170, align: 'right', },
     {
         id: 'email',
         label: 'Email',
         minWidth: 170,
-        // align: 'right',
+        align: 'center',
         // format: (value: number) => value.toLocaleString('en-US'),
     },
     {
         id: 'phone',
         label: 'Телефон',
         minWidth: 170,
-        // align: 'right',
+        align: 'center',
+        // format: (value: number) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'select',
+        label: 'Select',
+        minWidth: 170,
+        align: 'right',
         // format: (value: number) => value.toLocaleString('en-US'),
     },
 ]
 
 
-const useStyles = makeStyles({
-    root: {
-        width: '80%',
-    },
-    container: {
-        maxHeight: '100vh', // default height 440px
-    },
-})
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            width: '80%',
+        },
+        container: {
+            maxHeight: '100vh', // default height 440px
+        },
+        formControl: {
+            margin: theme.spacing(0),
+            minWidth: 120,
+            // marginLeft: 50,
+        },
+    }),
+);
+
 
 export default function TableUsers() {
     const classes = useStyles()
@@ -65,7 +87,7 @@ export default function TableUsers() {
 
 
     const dispatch = useDispatch()
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(getUsers(page + 1, rowsPerPage))
     }, [page, rowsPerPage])
 
@@ -108,7 +130,8 @@ export default function TableUsers() {
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-                            {columns.map((column) => (
+
+                            {/* {columns.map((column) => (
                                 <TableCell
                                     key={column.id}
                                     align={column.align}
@@ -116,7 +139,28 @@ export default function TableUsers() {
                                 >
                                     {column.label}
                                 </TableCell>
-                            ))}
+                            ))} */}
+
+                            <TableCell align='right' >{`Ім'я`}</TableCell>
+                            <TableCell align='right'>{`Призвище`}</TableCell>
+                            <TableCell align='center'>{`Email`}</TableCell>
+                            <TableCell align='center'> {`Телефон`}</TableCell>
+
+                            <TableCell align='right'>
+                                <FormControl className={classes.formControl}>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        defaultValue={10}
+                                    // value={age}
+                                    // onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Всі</MenuItem>
+                                        <MenuItem value={20}>Заблоковані</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </TableCell>
+
                         </TableRow>
                     </TableHead>
                     <TableBody>

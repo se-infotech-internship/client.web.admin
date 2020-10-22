@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table'
@@ -65,11 +65,11 @@ export default function SearchTable() {
     const rows = useSelector((state: RootState) => state.users.searchUsers)
     const countState = useSelector((state: RootState) => state.users.countUsers)
 
-    console.log(rows)
+    // console.log(rows)
 
 
     const dispatch = useDispatch()
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(getUsers(page + 1, rowsPerPage))
     }, [page, rowsPerPage])
 
@@ -110,8 +110,8 @@ export default function SearchTable() {
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
+                    <TableHead >
+                        <TableRow >
                             {columns.map((column) => (
                                 <TableCell
                                     key={column.id}

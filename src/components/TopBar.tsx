@@ -131,7 +131,7 @@ export default function TopBar() {
             <AppBar position="static">
                 <Toolbar>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        <Link to="/home" className={classes.component_link}>Панель адміністратора</Link>
+                        <Link to="/home" className={classes.component_link}>SmartRadar</Link>
                     </Typography>
 
                     <div className={classes.search}>
