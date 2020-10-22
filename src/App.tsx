@@ -1,6 +1,8 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from './redux/store'
+import { authUser } from './redux/reducers/userReducer'
 
 import LoginPage from './components/LoginPage'
 import HomePage from './components/homepage/HomePage'
@@ -16,14 +18,27 @@ import {
 } from 'react-router-dom'
 
 
+
+
+
 export default function App() {
+  const dispatch = useDispatch()
+
   const isAuth = useSelector((state: RootState) => state.users.isAuth)
+
+
+  useEffect(() => {
+    if (localStorage.getItem('token') !== null) {
+      dispatch(authUser()) // Чтобы при перезугрузке не терят сессию
+    }
+  })
+
 
   return (
     <Router>
       <Switch>
         {
-          !isAuth ?
+          isAuth ?
             <>
               <Route path="/home" component={HomePage} />
               <Redirect to="/home" />

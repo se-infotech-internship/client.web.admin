@@ -57,7 +57,7 @@ const useStyles = makeStyles({
     },
     submit_button: {
         margin: 10,
-        marginLeft: 650
+        // marginLeft: 650
     }
 })
 
@@ -65,6 +65,8 @@ const useStyles = makeStyles({
 export default function CardUser() {
     const classes = useStyles()
     let history = useHistory()
+
+    const [message, setMessage] = useState('')
 
     const [state, setState] = useState({
         checkedA: true,
@@ -86,7 +88,7 @@ export default function CardUser() {
     // console.log(selectUser)
 
     let userInfo = selectUser.map((user: rowsUsers) => (
-        <Card className={classes.root} variant="outlined">
+        <Card className={classes.root} variant="outlined" key={user.id}>
             <div className={classes.listItems_wrapper}>
                 <div className={classes.listItem}>
                     <ListItem>

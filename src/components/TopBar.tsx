@@ -121,6 +121,7 @@ export default function TopBar() {
     function handleClick() {
         localStorage.removeItem('token')
         dispatch(logout())
+        history.push('/login')
     }
 
     return (
