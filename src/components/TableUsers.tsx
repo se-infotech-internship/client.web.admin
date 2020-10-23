@@ -22,11 +22,11 @@ import { fetchRowsUsers, fetchCountUsers, clickUser } from '../redux/reducers/us
 import { Link, useHistory } from 'react-router-dom'
 
 interface Column {
-    id: 'name' | 'secondName' | 'email' | 'phone' | 'select';
+    id: 'name' | 'secondName' | 'email' | 'phone' | 'blocked' | 'select';
     label: string;
     minWidth?: number;
     align?: 'center' | 'right';
-    format?: (value: number) => string;
+    format?: (value: boolean) => string;
 }
 
 const columns: Column[] = [
@@ -45,6 +45,13 @@ const columns: Column[] = [
         minWidth: 170,
         align: 'center',
         // format: (value: number) => value.toLocaleString('en-US'),
+    },
+    {
+        id: 'blocked',
+        label: 'Статус',
+        minWidth: 170,
+        align: 'center',
+        format: (value: boolean) => value === false ? 'Активований' : 'Заблокований'
     },
     {
         id: 'select',
@@ -84,6 +91,8 @@ export default function TableUsers() {
 
     const rows = useSelector((state: RootState) => state.users.rowsUsers)
     const countState = useSelector((state: RootState) => state.users.countUsers)
+
+    // console.log(rows)
 
 
     const dispatch = useDispatch()
@@ -145,6 +154,7 @@ export default function TableUsers() {
                             <TableCell align='right'>{`Призвище`}</TableCell>
                             <TableCell align='center'>{`Email`}</TableCell>
                             <TableCell align='center'> {`Телефон`}</TableCell>
+                            <TableCell align='center'> {`Статус`}</TableCell>
 
                             <TableCell align='right'>
                                 <FormControl className={classes.formControl}>
@@ -169,13 +179,26 @@ export default function TableUsers() {
                                 // .filter(user => user.blocked)
                                 .map((row: any) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={toUserPage} style={{ cursor: 'pointer' }}>
+                                        <TableRow
+                                            hover
+                                            role="checkbox"
+                                            tabIndex={-1} key={row.id}
+                                            onClick={toUserPage}
+                                            style={{ cursor: 'pointer' }}
+                                        >
                                             {columns.map((column) => {
                                                 const value = row[column.id]
                                                 return (
-                                                    <TableCell key={column.id} align={column.align} onClick={() => handleClickUser(row.id)}>
+                                                    <TableCell
+                                                        key={column.id}
+                                                        align={column.align}
+                                                        onClick={() => handleClickUser(row.id)}
+                                                    >
                                                         <Link to="/user" style={{ textDecoration: 'none', color: 'grey' }} >
-                                                            {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                            {
+                                                                column.format && typeof value === 'boolean' ?
+                                                                    column.format(value) : value
+                                                            }
                                                         </Link>
                                                     </TableCell>
                                                 )

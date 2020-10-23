@@ -69,11 +69,18 @@ export default function CardUser() {
     const classes = useStyles()
     let history = useHistory()
 
+    const users = useSelector((state: RootState) => state.users.rowsUsers)
+    const userId = useSelector((state: RootState) => state.users.cardUserId)
+    const selectUser: rowsUsers[] = users.filter(user => user.id === userId)
+
+
+    // console.log(selectUser)
+
     const [message, setMessage] = useState('')
 
     const [state, setState] = useState({
         checkedA: true,
-        checkedB: true,
+        checkedB: !selectUser[0].blocked,
     })
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,13 +89,7 @@ export default function CardUser() {
     }
 
 
-    const users = useSelector((state: RootState) => state.users.rowsUsers)
-    const userId = useSelector((state: RootState) => state.users.cardUserId)
-    const selectUser: rowsUsers[] = users.filter(user => user.id === userId)
 
-    const nameUser = selectUser.map(user => user.name)
-    const secondNameUser = selectUser.map(user => user.secondName)
-    // console.log(selectUser)
 
     let userInfo = selectUser.map((user: rowsUsers) => (
         <Card className={classes.root} variant="outlined" key={user.id}>
@@ -104,7 +105,7 @@ export default function CardUser() {
                         <ListItemText primary={user.email} secondary={`email`} />
                     </ListItem>
                     <ListItem>
-                        <ListItemText primary={user.blocked ? "заблокований" : "активований"} secondary={`аккаунт`} />
+                        <ListItemText primary={state.checkedB ? "активований" : "заблокований"} secondary={`аккаунт`} />
                     </ListItem>
                 </div >
                 <div className={classes.listItem}>
@@ -203,7 +204,7 @@ export default function CardUser() {
             <CardContent>
                 <div className={classes.head_wrapper}>
                     <div>
-                        <Typography variant="h2" gutterBottom={true}>{nameUser} {secondNameUser}</Typography>
+                        <Typography variant="h2" gutterBottom={true}>{selectUser[0].name} {selectUser[0].secondName}</Typography>
                     </div>
                     <div className={classes.buttons_div} >
                         <div className={classes.blockDelete_buttons}>
