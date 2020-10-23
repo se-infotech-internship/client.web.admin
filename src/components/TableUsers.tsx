@@ -88,18 +88,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-
-const SELECT = {
+const SELECT: any = {
     All: () => true,
-    Blocked: (user: rowsUsers
-    ) => user.blocked === true
+    Blocked: (user: rowsUsers) => user.blocked === true
 }
 
 
 export default function TableUsers() {
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
-    const [filter, setFilter] = useState<string>('All')
+    const [filter, setFilter] = useState('All')
 
     const classes = useStyles()
     let history = useHistory()
