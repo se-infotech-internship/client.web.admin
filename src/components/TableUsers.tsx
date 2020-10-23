@@ -17,9 +17,10 @@ import MenuItem from '@material-ui/core/MenuItem'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../redux/store'
-import { fetchRowsUsers, fetchCountUsers, clickUser } from '../redux/reducers/userReducer'
+import { fetchRowsUsers, fetchCountUsers, clickUser, rowsUsers } from '../redux/reducers/userReducer'
 
 import { Link, useHistory } from 'react-router-dom'
+
 
 interface Column {
     id: 'name' | 'secondName' | 'email' | 'phone' | 'blocked' | 'select';
@@ -76,14 +77,29 @@ const useStyles = makeStyles((theme: Theme) =>
             minWidth: 120,
             // marginLeft: 50,
         },
+        tableRowUsers: {
+            cursor: 'pointer'
+        },
+        componentLink: {
+            textDecoration: 'none',
+            color: 'grey'
+        }
     }),
 );
+
+
+
+const SELECT = {
+    All: () => true,
+    Blocked: (user: rowsUsers
+    ) => user.blocked === true
+}
 
 
 export default function TableUsers() {
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
-    // const [selectUser, setSelectUser] = useState('')
+    const [filter, setFilter] = useState<string>('All')
 
     const classes = useStyles()
     let history = useHistory()
@@ -176,7 +192,8 @@ export default function TableUsers() {
                     <TableBody>
                         {
                             rows
-                                // .filter(user => user.blocked)
+                                .filter(SELECT[filter])
+                                // .filter((SELECT as any)[filter])
                                 .map((row: any) => {
                                     return (
                                         <TableRow
@@ -184,7 +201,7 @@ export default function TableUsers() {
                                             role="checkbox"
                                             tabIndex={-1} key={row.id}
                                             onClick={toUserPage}
-                                            style={{ cursor: 'pointer' }}
+                                            className={classes.tableRowUsers}
                                         >
                                             {columns.map((column) => {
                                                 const value = row[column.id]
@@ -194,7 +211,7 @@ export default function TableUsers() {
                                                         align={column.align}
                                                         onClick={() => handleClickUser(row.id)}
                                                     >
-                                                        <Link to="/user" style={{ textDecoration: 'none', color: 'grey' }} >
+                                                        <Link to="/user" className={classes.componentLink} >
                                                             {
                                                                 column.format && typeof value === 'boolean' ?
                                                                     column.format(value) : value
