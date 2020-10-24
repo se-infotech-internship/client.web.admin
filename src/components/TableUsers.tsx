@@ -88,16 +88,18 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
+
 const SELECT: any = {
     All: () => true,
-    Blocked: (user: rowsUsers) => user.blocked === true
+    Active: (user: rowsUsers) => !user.blocked,
+    Blocked: (user: rowsUsers) => user.blocked
 }
 
 
 export default function TableUsers() {
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
-    const [filter, setFilter] = useState('All')
+    const [filterUser, setFilterUser] = useState('All')
 
     const classes = useStyles()
     let history = useHistory()
@@ -147,6 +149,10 @@ export default function TableUsers() {
         history.push("/user")
     }
 
+    const handleChangeFilter = (event: React.ChangeEvent<{ value: unknown }>) => {
+        setFilterUser(event.target.value as string);
+    };
+
     return (
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
@@ -175,12 +181,13 @@ export default function TableUsers() {
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="demo-simple-select"
-                                        defaultValue={10}
-                                    // value={age}
-                                    // onChange={handleChange}
+                                        defaultValue={'All'}
+                                        value={filterUser}
+                                        onChange={handleChangeFilter}
                                     >
-                                        <MenuItem value={10}>Всі</MenuItem>
-                                        <MenuItem value={20}>Заблоковані</MenuItem>
+                                        <MenuItem value={'All'}>Всі</MenuItem>
+                                        <MenuItem value={'Active'}>Активовані</MenuItem>
+                                        <MenuItem value={'Blocked'}>Заблоковані</MenuItem>
                                     </Select>
                                 </FormControl>
                             </TableCell>
@@ -190,7 +197,7 @@ export default function TableUsers() {
                     <TableBody>
                         {
                             rows
-                                .filter(SELECT[filter])
+                                .filter(SELECT[filterUser])
                                 // .filter((SELECT as any)[filter])
                                 .map((row: any) => {
                                     return (
