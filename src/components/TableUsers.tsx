@@ -23,16 +23,16 @@ import { Link, useHistory } from 'react-router-dom'
 
 
 interface Column {
-    id: 'name' | 'secondName' | 'email' | 'phone' | 'blocked' | 'select';
+    id: 'name' | 'secondName' | 'email' | 'phone' | 'blocked';
     label: string;
     minWidth?: number;
-    align?: 'center' | 'right';
+    align?: 'center' | 'right' | 'left';
     format?: (value: boolean) => string;
 }
 
 const columns: Column[] = [
-    { id: 'name', label: `Ім'я`, minWidth: 170, align: 'right', },
-    { id: 'secondName', label: 'Призвище', minWidth: 170, align: 'right', },
+    { id: 'name', label: `Ім'я`, minWidth: 170, align: 'center', },
+    { id: 'secondName', label: 'Призвище', minWidth: 170, align: 'center', },
     {
         id: 'email',
         label: 'Email',
@@ -54,13 +54,6 @@ const columns: Column[] = [
         align: 'center',
         format: (value: boolean) => value === false ? 'Активований' : 'Заблокований'
     },
-    {
-        id: 'select',
-        label: 'Select',
-        minWidth: 170,
-        align: 'right',
-        // format: (value: number) => value.toLocaleString('en-US'),
-    },
 ]
 
 
@@ -73,9 +66,9 @@ const useStyles = makeStyles((theme: Theme) =>
             maxHeight: '100vh', // default height 440px
         },
         formControl: {
-            margin: theme.spacing(0),
+            margin: theme.spacing(1),
             minWidth: 120,
-            // marginLeft: 50,
+            marginRight: 25,
         },
         tableRowUsers: {
             cursor: 'pointer'
@@ -83,6 +76,10 @@ const useStyles = makeStyles((theme: Theme) =>
         componentLink: {
             textDecoration: 'none',
             color: 'grey'
+        },
+        div_filter: {
+            backgroundColor: '#eceff1',
+            textAlign: 'right'
         }
     }),
 );
@@ -155,12 +152,27 @@ export default function TableUsers() {
 
     return (
         <Paper className={classes.root}>
+            <div className={classes.div_filter}>
+                <FormControl className={classes.formControl}>
+                    <Select
+                        labelId="select-users"
+                        id="select"
+                        variant="standard"
+                        defaultValue={'All'}
+                        value={filterUser}
+                        onChange={handleChangeFilter}
+                    >
+                        <MenuItem value={'All'}>Всі</MenuItem>
+                        <MenuItem value={'Active'}>Активовані</MenuItem>
+                        <MenuItem value={'Blocked'}>Заблоковані</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
             <TableContainer className={classes.container}>
                 <Table stickyHeader aria-label="sticky table">
                     <TableHead>
                         <TableRow>
-
-                            {/* {columns.map((column) => (
+                            {columns.map((column) => (
                                 <TableCell
                                     key={column.id}
                                     align={column.align}
@@ -168,37 +180,13 @@ export default function TableUsers() {
                                 >
                                     {column.label}
                                 </TableCell>
-                            ))} */}
-
-                            <TableCell align='right' >{`Ім'я`}</TableCell>
-                            <TableCell align='right'>{`Призвище`}</TableCell>
-                            <TableCell align='center'>{`Email`}</TableCell>
-                            <TableCell align='center'> {`Телефон`}</TableCell>
-                            <TableCell align='center'> {`Статус`}</TableCell>
-
-                            <TableCell align='right'>
-                                <FormControl className={classes.formControl}>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        defaultValue={'All'}
-                                        value={filterUser}
-                                        onChange={handleChangeFilter}
-                                    >
-                                        <MenuItem value={'All'}>Всі</MenuItem>
-                                        <MenuItem value={'Active'}>Активовані</MenuItem>
-                                        <MenuItem value={'Blocked'}>Заблоковані</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </TableCell>
-
+                            ))}
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {
                             rows
                                 .filter(SELECT[filterUser])
-                                // .filter((SELECT as any)[filter])
                                 .map((row: any) => {
                                     return (
                                         <TableRow
