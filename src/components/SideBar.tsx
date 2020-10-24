@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
             height: '100vh',
             // maxWidth: 360,
             backgroundColor: theme.palette.background.paper,
+            // backgroundColor: '#fafafa',
             borderRight: '3px solid grey',
         },
         wrapper_links: {

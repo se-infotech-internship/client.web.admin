@@ -71,6 +71,9 @@ const useStyles = makeStyles((theme: Theme) =>
             textDecoration: 'none',
             color: 'white'
         },
+        div_button: {
+            marginLeft: "70%"
+        }
     }),
 )
 
@@ -118,8 +121,6 @@ export default function TopBar() {
     }
 
 
-
-
     function handleClick() {
         localStorage.removeItem('token')
         dispatch(logout())
@@ -151,7 +152,7 @@ export default function TopBar() {
                             />
                         </form>
                     </div>
-                    <div style={{ marginLeft: "62.5%" }}>
+                    <div className={classes.div_button} style={{}}>
                         <Button
                             variant="outlined"
                             color="inherit"

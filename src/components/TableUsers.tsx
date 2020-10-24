@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         componentLink: {
             textDecoration: 'none',
-            color: 'grey'
+            color: '#616161'
         },
         div_filter: {
             backgroundColor: '#eceff1',
