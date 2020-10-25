@@ -267,36 +267,3 @@ export default function CardUser() {
 }
 
 
-/*
-   const {
-       TZLicence,
-       TZNumber,
-       TZVIN,
-       appPaymentReminder,
-       blocked,
-       camAutoFind,
-       confirmed,
-       createdAt,
-       distToCam,
-       distanceToCam,
-       driverLicence,
-       email,
-       emailNotifications,
-       finesAutoCheck,
-       finesPaymentAutoCheck,
-       id,
-       isAdmin,
-       maxSpeedNotifications,
-       middleName,
-       name,
-       password,
-       phone,
-       pushNotifications,
-       rememberPassword,
-       secondName,
-       sound,
-       turnOnApp,
-       updatedAt,
-       voiceNotifications,
-   } = selectUser[0]
-  */

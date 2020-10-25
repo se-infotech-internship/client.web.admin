@@ -94,12 +94,13 @@ const SELECT: any = {
 
 
 export default function TableUsers() {
+    const classes = useStyles()
+    let history = useHistory()
+    const dispatch = useDispatch()
+
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
     const [filterUser, setFilterUser] = useState('All')
-
-    const classes = useStyles()
-    let history = useHistory()
 
 
     const rows = useSelector((state: RootState) => state.users.rowsUsers)
@@ -108,7 +109,6 @@ export default function TableUsers() {
     // console.log(rows)
 
 
-    const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getUsers(page + 1, rowsPerPage))
     }, [page, rowsPerPage])
@@ -116,7 +116,14 @@ export default function TableUsers() {
     const getUsers = (page: number, rows: number) => async (dispatch: AppDispatch) => {
         try {
             // console.log(`${page} ${rows}`)
-            const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}`)
+            const response = await fetch(`http://localhost:5001/api/admin/users/?page=${page}&quantity=${rows}`, {
+                //@ts-ignore
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            })
+
+
             const result = await response.json()
 
             dispatch(fetchCountUsers(result.count))
